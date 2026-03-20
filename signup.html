@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Phantom Creative</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black">
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-crown"></i>
+        <span class="gradient-text">Phantom Creative</span>
+      </a>
+      <div class="navbar-menu" id="navbarMenu">
+        <a href="index.html" class="navbar-link">Home</a>
+        <a href="about.html" class="navbar-link">About</a>
+        <a href="services.html" class="navbar-link">Services</a>
+        <a href="portfolio.html" class="navbar-link">Portfolio</a>
+        <a href="blog.html" class="navbar-link">Blog</a>
+        <a href="contact.html" class="navbar-link">Contact</a>
+      </div>
+      <div class="navbar-buttons">
+        <a href="login.html" class="btn-outline" style="padding: 8px 20px;">Sign In</a>
+        <button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="auth-page">
+    <div class="auth-card glass-card p-8 rounded-2xl animate-fadeInUp">
+      <div class="auth-header">
+        <i class="fas fa-crown"></i>
+        <h1 class="gradient-text">Create Account</h1>
+        <p>Join the Phantom Creative community</p>
+      </div>
+      
+      <form id="signupForm" class="auth-form">
+        <input type="text" id="signupName" placeholder="Full name" class="form-input" required>
+        <input type="email" id="signupEmail" placeholder="Email address" class="form-input" required>
+        <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" class="form-input" required>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm password" class="form-input" required>
+        <button type="submit" class="btn-primary w-full">Create Account <i class="fas fa-user-plus ml-2"></i></button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-icon" onclick="openSupport()">
+    <i class="fas fa-headset"></i>
+    <span class="support-tooltip">Need help? Chat with us</span>
+  </div>
+
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+  <script type="module">
+    import { auth, db, ref, set } from './firebase-config.js';
+    import { createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    
+    function showToast(message, type) { 
+      const toast = document.createElement('div'); 
+      toast.className = `toast-notification toast-${type}`; 
+      toast.innerHTML = message; 
+      document.body.appendChild(toast); 
+      setTimeout(() => toast.remove(), 3000); 
+    }
+    
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
+    
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    
+    window.openSupport = () => {
+      window.location.href = "mailto:legateakanjimusab@gmail.com?subject=Support Request&body=Hello, I need help with...";
+    };
+    
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+      const confirmPassword = document.getElementById('signupConfirmPassword').value;
+      
+      if (!name || !email || !password) {
+        showToast('Please fill in all fields', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters', 'error');
+        return;
+      }
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match', 'error');
+        return;
+      }
+      
+      const submitBtn = e.target.querySelector('button');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating Account...';
+      submitBtn.disabled = true;
+      
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
+        await set(ref(db, `users/${userCredential.user.uid}`), {
+          displayName: name,
+          email: email,
+          createdAt: Date.now(),
+          role: 'user'
+        });
+        
+        // Clear form
+        document.getElementById('signupName').value = '';
+        document.getElementById('signupEmail').value = '';
+        document.getElementById('signupPassword').value = '';
+        document.getElementById('signupConfirmPassword').value = '';
+        
+        showToast('Account created successfully! Welcome to Phantom Creative!', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      } catch (error) {
+        if (error.code === 'auth/email-already-in-use') showToast('Email already registered. Please sign in instead.', 'error');
+        else showToast(error.message, 'error');
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
