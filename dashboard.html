@@ -105,16 +105,14 @@
   <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
-    import { auth, db, ADMIN_EMAIL, ref, get, set, push, onValue, remove, update, GOOGLE_SCRIPT_URL } from './firebase-config.js';
+    import { auth, db, ADMIN_EMAIL, ref, get, set, push, onValue, remove, update } from './firebase-config.js';
     import { onAuthStateChanged, updateProfile, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     let currentUser = null; let isAdmin = false;
     
     function showToast(message, type) { const toast = document.createElement('div'); toast.className = `toast-notification toast-${type}`; toast.innerHTML = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
     
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navbarMenu = document.getElementById('navbarMenu');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn'); const navbarMenu = document.getElementById('navbarMenu');
     mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
-    
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -125,7 +123,7 @@
     
     async function loadAdminCounts() { const gallerySnap = await get(ref(db, 'gallery')); const testimonialsSnap = await get(ref(db, 'testimonials')); const blogSnap = await get(ref(db, 'blog')); const analyticsSnap = await get(ref(db, 'analytics')); document.getElementById('galleryCount').innerText = gallerySnap.exists() ? Object.keys(gallerySnap.val()).length : 0; document.getElementById('testimonialsCount').innerText = testimonialsSnap.exists() ? Object.keys(testimonialsSnap.val()).length : 0; document.getElementById('blogCount').innerText = blogSnap.exists() ? Object.keys(blogSnap.val()).length : 0; document.getElementById('visitorCount').innerText = analyticsSnap.exists() ? Object.keys(analyticsSnap.val()).length : 0; }
     
-    async function loadAnalytics() { const analyticsRef = ref(db, 'analytics'); onValue(analyticsRef, (snapshot) => { const container = document.getElementById('analyticsList'); const analytics = snapshot.val(); if (analytics) { const sorted = Object.entries(analytics).sort((a,b)=>b[1].timestamp - a[1].timestamp).slice(0, 50); container.innerHTML = sorted.map(([id, data]) => `<div class="bg-gray-800 p-3 rounded-lg"><div class="flex justify-between"><span class="font-bold text-orange-400">${data.ip || 'Unknown'}</span><span class="text-xs text-gray-400">${new Date(data.timestamp).toLocaleString()}</span></div><p class="text-sm"><span class="text-gray-400">📍</span> ${data.city || 'Unknown'}, ${data.country || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📱</span> ${data.device || 'Unknown'} | ${data.browser || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📄</span> ${data.page || '/'}</p></div>`).join(''); } else { container.innerHTML = '<div class="text-center text-gray-400 py-8">No visitor data yet.</div>'; } }); }
+    async function loadAnalytics() { const analyticsRef = ref(db, 'analytics'); onValue(analyticsRef, (snapshot) => { const container = document.getElementById('analyticsList'); const analytics = snapshot.val(); if (analytics) { const sorted = Object.entries(analytics).sort((a,b)=>b[1].timestamp - a[1].timestamp).slice(0, 50); container.innerHTML = sorted.map(([id, data]) => `<div class="bg-gray-800 p-3 rounded-lg"><div class="flex justify-between"><span class="font-bold text-orange-400">${data.ip || 'Unknown'}</span><span class="text-xs text-gray-400">${new Date(data.timestamp).toLocaleString()}</span></div><p class="text-sm"><span class="text-gray-400">📍</span> ${data.city || 'Unknown'}, ${data.country || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📱</span> ${data.device || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📄</span> ${data.page || '/'}</p></div>`).join(''); } else { container.innerHTML = '<div class="text-center text-gray-400 py-8">No visitor data yet.</div>'; } }); }
     
     window.addGalleryItem = async () => { const title = document.getElementById('galleryTitle').value; const category = document.getElementById('galleryCategory').value; const imageUrl = document.getElementById('galleryImageUrl').value; if (!title || !imageUrl) { showToast('Please fill in title and image URL', 'error'); return; } await push(ref(db, 'gallery'), { title, category, imageUrl, timestamp: Date.now() }); showToast('Gallery item added!'); document.getElementById('galleryTitle').value = ''; document.getElementById('galleryCategory').value = ''; document.getElementById('galleryImageUrl').value = ''; };
     window.deleteGalleryItem = async (id) => { if (confirm('Delete this item?')) { await remove(ref(db, `gallery/${id}`)); showToast('Deleted'); } };
