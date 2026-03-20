@@ -1,149 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phantom Creative Co</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    body { background-color: #0a0a0a; color: #ff6f00; font-family: 'Arial', sans-serif; }
-    .btn { background-color: #ff6f00; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; transition: 0.3s; }
-    .btn:hover { background-color: #e65c00; }
-    input { padding: 0.5rem; margin: 0.3rem 0; border-radius: 0.3rem; border: none; width: 100%; }
-    .card { background-color: #111; padding: 1rem; border-radius: 1rem; margin: 0.5rem 0; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Phantom Creative Co.</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family:'Orbitron',sans-serif; background:#050505; color:white; }
+.card { background:#0a0a0a; border:1px solid rgba(255,102,0,0.2); transition:0.3s; }
+.card:hover { transform:translateY(-5px); box-shadow:0 0 20px rgba(255,102,0,0.6); }
+.btn { background:linear-gradient(45deg,#ff5a00,#ff7a00); color:white; transition:0.3s; }
+.btn:hover { opacity:0.9; }
+.grid-bg {background-image: linear-gradient(rgba(255,102,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,102,0,0.05) 1px, transparent 1px); background-size:40px 40px;}
+.toast {position:fixed; bottom:80px; right:20px; background:#ff5a00; padding:10px 15px; border-radius:6px;}
+</style>
 </head>
-<body class="p-4">
 
-  <h1 class="text-3xl font-bold mb-4 text-orange-500">Phantom Creative Co</h1>
-  <p class="mb-6">Minimalistic futuristic branding & design studio</p>
+<body class="grid-bg">
 
-  <!-- Auth Section -->
-  <div class="card">
-    <h2 class="text-xl mb-2">Signup / Login</h2>
-    <input type="email" id="authEmail" placeholder="Email">
-    <input type="password" id="authPass" placeholder="Password">
-    <button class="btn mb-2" onclick="signup()">Sign Up</button>
-    <button class="btn" onclick="login()">Login</button>
-  </div>
+<!-- NAV -->
+<header class="fixed w-full flex justify-between p-4 bg-black/40 backdrop-blur z-50">
+<h1 class="text-orange-500 font-bold">Phantom</h1>
+<button onclick="toggleMode()">🌙</button>
+</header>
 
-  <!-- File Upload Section -->
-  <div class="card">
-    <h2 class="text-xl mb-2">Upload Your File</h2>
-    <input type="file" id="fileInput">
-    <button class="btn mb-2" onclick="uploadFile()">Upload File</button>
-    <ul id="fileList"></ul>
-  </div>
+<!-- HERO -->
+<section class="h-screen flex flex-col justify-center items-center text-center px-6">
+<h1 class="text-5xl text-orange-500 mb-4">Beyond Vision</h1>
+<p class="text-gray-300 max-w-xl">Minimalism meets bold futuristic branding.</p>
+<button class="btn px-4 py-2 mt-6" onclick="googleLogin()">Login with Google</button>
+</section>
 
-  <!-- Paystack Payment Section -->
-  <div class="card">
-    <h2 class="text-xl mb-2">Make Payment</h2>
-    <input type="number" id="amount" placeholder="Amount (NGN)">
-    <button class="btn" onclick="payWithPaystack()">Pay Now</button>
-  </div>
+<!-- SERVICES -->
+<section class="py-16 text-center">
+<h2 class="text-3xl text-orange-500 mb-8">Services</h2>
+<div class="grid md:grid-cols-3 gap-6 px-6">
+<div class="card p-6 rounded">Logo Design</div>
+<div class="card p-6 rounded">Business Cards</div>
+<div class="card p-6 rounded">Flyers & Posters</div>
+</div>
+</section>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
+<!-- PRICING -->
+<section class="py-16 text-center">
+<h2 class="text-3xl text-orange-500 mb-8">Pricing</h2>
 
-  <!-- Firebase config -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCzbWS2nhqlW-Wcvitxdl_prq7Xs766QWA",
-      authDomain: "phantom-creative-be7a9.firebaseapp.com",
-      databaseURL: "https://phantom-creative-be7a9-default-rtdb.firebaseio.com",
-      projectId: "phantom-creative-be7a9",
-      storageBucket: "phantom-creative-be7a9.firebasestorage.app",
-      messagingSenderId: "468520974182",
-      appId: "1:468520974182:web:a8b12f3a54a34deea43aa7"
-    };
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.database();
-    const storage = firebase.storage();
-  </script>
+<div class="grid md:grid-cols-3 gap-6 px-6">
 
-  <!-- Firebase functions -->
-  <script>
-    // Signup
-    function signup(){
-      const email = document.getElementById('authEmail').value;
-      const pass = document.getElementById('authPass').value;
-      auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => alert("Account created!"))
-        .catch(err => alert(err.message));
-    }
+<div class="card p-6 rounded">
+<h3>Basic</h3>
+<p class="text-orange-500 text-2xl">₦7,500</p>
+<button onclick="openPayment(750000)" class="btn px-4 py-2 mt-4 rounded">Choose</button>
+</div>
 
-    // Login
-    function login(){
-      const email = document.getElementById('authEmail').value;
-      const pass = document.getElementById('authPass').value;
-      auth.signInWithEmailAndPassword(email, pass)
-        .then(() => {
-          alert("Login successful!");
-          loadFiles();
-        })
-        .catch(err => alert(err.message));
-    }
+<div class="card p-6 rounded border border-orange-500">
+<h3>Pro</h3>
+<p class="text-orange-500 text-2xl">₦10,500</p>
+<button onclick="openPayment(1050000)" class="btn px-4 py-2 mt-4 rounded">Choose</button>
+</div>
 
-    // Upload File
-    function uploadFile(){
-      const file = document.getElementById('fileInput').files[0];
-      if(!file) return alert("Select a file");
-      const user = auth.currentUser;
-      if(!user) return alert("Login first");
+<div class="card p-6 rounded">
+<h3>Advanced</h3>
+<p class="text-orange-500 text-2xl">₦22,500</p>
+<button onclick="openPayment(2250000)" class="btn px-4 py-2 mt-4 rounded">Choose</button>
+</div>
 
-      const ref = storage.ref("files/" + user.uid + "/" + file.name);
-      ref.put(file).then(() => {
-        alert("File uploaded!");
-        db.ref("files/" + user.uid + "/" + file.name).set({ name: file.name, time: Date.now() });
-        loadFiles();
-      });
-    }
+</div>
+</section>
 
-    // Load User Files
-    function loadFiles(){
-      const user = auth.currentUser;
-      if(!user) return;
-      db.ref("files/" + user.uid).once('value', snapshot => {
-        const files = snapshot.val() || {};
-        const list = Object.keys(files).map(key => `<li>${files[key].name}</li>`).join("");
-        document.getElementById('fileList').innerHTML = list;
-      });
-    }
-  </script>
+<!-- AI GENERATOR -->
+<section class="py-16 text-center">
+<h2 class="text-2xl text-orange-500 mb-4">AI Logo Generator</h2>
 
-  <!-- Paystack -->
-  <script src="https://js.paystack.co/v1/inline.js"></script>
-  <script>
-    function payWithPaystack(){
-      const amount = document.getElementById('amount').value * 100; // kobo
-      if(!amount) return alert("Enter amount");
-      const user = auth.currentUser ? auth.currentUser.email : "guest";
+<input id="aiInput" placeholder="Enter brand name..."
+class="p-2 w-64 bg-black border border-orange-500 mb-4">
 
-      var handler = PaystackPop.setup({
-        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
-        email: user,
-        amount: amount,
-        currency: "NGN",
-        callback: function(response){
-          alert('Payment successful. Reference: ' + response.reference);
-          db.ref("payments/" + response.reference).set({
-            email: user,
-            amount: amount/100,
-            reference: response.reference,
-            date: Date.now()
-          });
-        },
-        onClose: function(){
-          alert('Payment window closed.');
-        }
-      });
-      handler.openIframe();
-    }
-  </script>
+<br>
+
+<button onclick="generateLogo()" class="btn px-4 py-2 rounded">Generate</button>
+
+<br><br>
+
+<textarea id="aiOutput" class="w-64 h-24 bg-black border border-gray-700"></textarea>
+
+<br>
+
+<button onclick="copyText()" class="btn px-3 py-1 mt-2 rounded">Copy</button>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div id="modal" class="fixed inset-0 hidden bg-black/80 flex items-center justify-center">
+<div class="bg-black p-6 rounded border border-orange-500 text-center">
+
+<h3 class="text-orange-500 mb-3">Enter Email</h3>
+
+<input id="email" class="p-2 bg-gray-900 border border-gray-700 mb-4">
+
+<br>
+
+<button onclick="payNow()" class="btn px-4 py-2 rounded">Pay</button>
+
+</div>
+</div>
+
+<!-- FLOAT -->
+<button onclick="scrollTop()" class="fixed bottom-6 right-6 bg-orange-500 p-3 rounded">↑</button>
+
+<a href="https://wa.me/234915118688" target="_blank"
+class="fixed bottom-20 right-6 bg-green-500 px-4 py-2 rounded">
+Chat
+</a>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="hidden p-6 text-center">
+<h2 class="text-2xl text-orange-500 mb-4">Dashboard</h2>
+<p id="userEmail" class="mb-4"></p>
+
+<!-- FILE UPLOAD -->
+<input type="file" id="fileInput" class="mb-4">
+<button onclick="uploadFile()" class="btn px-4 py-2 rounded mb-4">Upload Project File</button>
+
+<h3 class="text-orange-400 mb-2">Uploaded Files</h3>
+<ul id="fileList" class="text-sm text-gray-300"></ul>
+
+<br>
+
+<button onclick="logout()" class="bg-red-500 px-4 py-2 rounded">Logout</button>
+</div>
+
+<script>
+// FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyCzbWS2nhqlW-Wcvitxdl_prq7Xs766QWA",
+  authDomain: "phantom-creative-be7a9.firebaseapp.com",
+  databaseURL: "https://phantom-creative-be7a9-default-rtdb.firebaseio.com",
+  projectId: "phantom-creative-be7a9",
+  storageBucket: "phantom-creative-be7a9.firebasestorage.app",
+  messagingSenderId: "468520974182",
+  appId: "1:468520974182:web:a8b12f3a54a34deea43aa7"
+};
+
+// INIT FIREBASE
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const storage = firebase.storage();
+
+// GOOGLE LOGIN
+function googleLogin(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result=>{
+      showToast("Login successful!");
+      document.getElementById("dashboard").classList.remove("hidden");
+      document.getElementById("userEmail").innerText = "Logged in as: "+result.user.email;
+    })
+    .catch(err=>showToast(err.message));
+}
+
+// LOGOUT
+function logout(){
+  auth.signOut().then(()=> location.reload());
+}
+
+// FILE UPLOAD
+function uploadFile(){
+  const file = document.getElementById("fileInput").files[0];
+  if(!file){ showToast("Select file"); return; }
+  const user = auth.currentUser;
+  if(!user){ showToast("Login first"); return; }
+
+  const ref = storage.ref("files/"+user.uid+"/"+file.name);
+  ref.put(file).then(()=>{
+    showToast("File uploaded!");
+    db.ref("files/"+user.uid+"/"+file.name).set({ name:file.name, time:Date.now() });
+    loadFiles();
+  });
+}
+
+// LOAD FILES
+function loadFiles(){
+  const user = auth.currentUser;
+  if(!user) return;
+  db.ref("files/"+user.uid).once('value',snapshot=>{
+    const files = snapshot.val()||{};
+    const list = Object.keys(files).map(k=>`<li>${files[k].name}</li>`).join("");
+    document.getElementById("fileList").innerHTML=list;
+  });
+}
+
+// PAYSTACK PAYMENT
+let amount = 0;
+function openPayment(a){
+  amount=a;
+  document.getElementById("modal").classList.remove("hidden");
+}
+
+function payNow(){
+  let email = auth.currentUser? auth.currentUser.email : document.getElementById("email").value;
+  if(!email){ showToast("Enter email"); return; }
+
+  var handler = PaystackPop.setup({
+    key:'YOUR_PAYSTACK_PUBLIC_KEY',
+    email:email,
+    amount:amount,
+    currency:"NGN",
+    callback:function(res){
+      showToast("Payment successful: "+res.reference);
+      db.ref("payments/"+res.reference).set({ email:email, amount:amount/100, reference:res.reference, date:Date.now() });
+      document.getElementById("modal").classList.add("hidden");
+    },
+    onClose:function(){ showToast("Payment cancelled"); }
+  });
+  handler.openIframe();
+}
+
+// AI GENERATOR
+function generateLogo(){
+  const val=document.getElementById("aiInput").value;
+  document.getElementById("aiOutput").value=`Modern futuristic logo for ${val}, minimalist, bold identity`;
+}
+
+// COPY AI TEXT
+function copyText(){ 
+  const t=document.getElementById("aiOutput"); 
+  t.select(); document.execCommand("copy"); 
+  showToast("Copied");
+}
+
+// TOAST
+function showToast(msg){
+  const t=document.createElement("div"); t.className="toast"; t.innerText=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
+
+// DARK MODE
+function toggleMode(){ document.body.classList.toggle("bg-white"); document.body.classList.toggle("text-black"); }
+
+// SCROLL TOP
+function scrollTop(){ window.scrollTo({top:0,behavior:"smooth"}); }
+
+</script>
 
 </body>
 </html>
