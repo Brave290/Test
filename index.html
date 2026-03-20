@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Creative Co</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #0a0a0a; color: #ff6f00; font-family: 'Arial', sans-serif; }
+    .btn { background-color: #ff6f00; color: white; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; transition: 0.3s; }
+    .btn:hover { background-color: #e65c00; }
+    input { padding: 0.5rem; margin: 0.3rem 0; border-radius: 0.3rem; border: none; width: 100%; }
+    .card { background-color: #111; padding: 1rem; border-radius: 1rem; margin: 0.5rem 0; }
+  </style>
+</head>
+<body class="p-4">
+
+  <h1 class="text-3xl font-bold mb-4 text-orange-500">Phantom Creative Co</h1>
+  <p class="mb-6">Minimalistic futuristic branding & design studio</p>
+
+  <!-- Auth Section -->
+  <div class="card">
+    <h2 class="text-xl mb-2">Signup / Login</h2>
+    <input type="email" id="authEmail" placeholder="Email">
+    <input type="password" id="authPass" placeholder="Password">
+    <button class="btn mb-2" onclick="signup()">Sign Up</button>
+    <button class="btn" onclick="login()">Login</button>
+  </div>
+
+  <!-- File Upload Section -->
+  <div class="card">
+    <h2 class="text-xl mb-2">Upload Your File</h2>
+    <input type="file" id="fileInput">
+    <button class="btn mb-2" onclick="uploadFile()">Upload File</button>
+    <ul id="fileList"></ul>
+  </div>
+
+  <!-- Paystack Payment Section -->
+  <div class="card">
+    <h2 class="text-xl mb-2">Make Payment</h2>
+    <input type="number" id="amount" placeholder="Amount (NGN)">
+    <button class="btn" onclick="payWithPaystack()">Pay Now</button>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
+
+  <!-- Firebase config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCzbWS2nhqlW-Wcvitxdl_prq7Xs766QWA",
+      authDomain: "phantom-creative-be7a9.firebaseapp.com",
+      databaseURL: "https://phantom-creative-be7a9-default-rtdb.firebaseio.com",
+      projectId: "phantom-creative-be7a9",
+      storageBucket: "phantom-creative-be7a9.firebasestorage.app",
+      messagingSenderId: "468520974182",
+      appId: "1:468520974182:web:a8b12f3a54a34deea43aa7"
+    };
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+    const storage = firebase.storage();
+  </script>
+
+  <!-- Firebase functions -->
+  <script>
+    // Signup
+    function signup(){
+      const email = document.getElementById('authEmail').value;
+      const pass = document.getElementById('authPass').value;
+      auth.createUserWithEmailAndPassword(email, pass)
+        .then(() => alert("Account created!"))
+        .catch(err => alert(err.message));
+    }
+
+    // Login
+    function login(){
+      const email = document.getElementById('authEmail').value;
+      const pass = document.getElementById('authPass').value;
+      auth.signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          alert("Login successful!");
+          loadFiles();
+        })
+        .catch(err => alert(err.message));
+    }
+
+    // Upload File
+    function uploadFile(){
+      const file = document.getElementById('fileInput').files[0];
+      if(!file) return alert("Select a file");
+      const user = auth.currentUser;
+      if(!user) return alert("Login first");
+
+      const ref = storage.ref("files/" + user.uid + "/" + file.name);
+      ref.put(file).then(() => {
+        alert("File uploaded!");
+        db.ref("files/" + user.uid + "/" + file.name).set({ name: file.name, time: Date.now() });
+        loadFiles();
+      });
+    }
+
+    // Load User Files
+    function loadFiles(){
+      const user = auth.currentUser;
+      if(!user) return;
+      db.ref("files/" + user.uid).once('value', snapshot => {
+        const files = snapshot.val() || {};
+        const list = Object.keys(files).map(key => `<li>${files[key].name}</li>`).join("");
+        document.getElementById('fileList').innerHTML = list;
+      });
+    }
+  </script>
+
+  <!-- Paystack -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    function payWithPaystack(){
+      const amount = document.getElementById('amount').value * 100; // kobo
+      if(!amount) return alert("Enter amount");
+      const user = auth.currentUser ? auth.currentUser.email : "guest";
+
+      var handler = PaystackPop.setup({
+        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+        email: user,
+        amount: amount,
+        currency: "NGN",
+        callback: function(response){
+          alert('Payment successful. Reference: ' + response.reference);
+          db.ref("payments/" + response.reference).set({
+            email: user,
+            amount: amount/100,
+            reference: response.reference,
+            date: Date.now()
+          });
+        },
+        onClose: function(){
+          alert('Payment window closed.');
+        }
+      });
+      handler.openIframe();
+    }
+  </script>
+
+</body>
+</html>
