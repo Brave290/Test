@@ -16,14 +16,13 @@
 </head>
 <body class="bg-black">
 
-  <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-orange-500/30">
-    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="flex items-center space-x-2"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-2xl font-black gradient-text">Phantom Creative</span></a>
-      <div class="flex items-center space-x-4">
-        <button onclick="window.location.href='index.html'" class="text-gray-400 hover:text-orange-500 transition"><i class="fas fa-home mr-1"></i> Home</button>
-        <span id="userName" class="text-gray-300 hidden md:inline">Loading...</span>
-        <button onclick="logout()" class="bg-red-600/50 px-4 py-2 rounded-lg hover:bg-red-600 transition"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></a>
+      <div class="navbar-menu" id="navbarMenu">
+        <a href="index.html" class="navbar-link">Home</a><a href="about.html" class="navbar-link">About</a><a href="services.html" class="navbar-link">Services</a><a href="portfolio.html" class="navbar-link">Portfolio</a><a href="blog.html" class="navbar-link">Blog</a><a href="contact.html" class="navbar-link">Contact</a>
       </div>
+      <div class="navbar-buttons"><span id="userName" class="text-orange-400 text-sm hidden md:inline"></span><button onclick="logout()" class="bg-red-600/50 px-4 py-2 rounded-lg hover:bg-red-600 transition"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button><button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button></div>
     </div>
   </nav>
 
@@ -94,7 +93,6 @@
       </div>
     </div>
     
-    <!-- Rest of the admin sections (gallery, testimonials, blog, services, messages) remain the same as before -->
     <div id="adminGallery" class="hidden"><div class="glass-card p-6 rounded-2xl mb-6"><h3 class="text-xl font-bold mb-4">Add Gallery Item</h3><input type="text" id="galleryTitle" placeholder="Title" class="form-input mb-3"><input type="text" id="galleryCategory" placeholder="Category" class="form-input mb-3"><input type="url" id="galleryImageUrl" placeholder="Image URL" class="form-input mb-3"><button onclick="addGalleryItem()" class="btn-primary w-full">Add to Gallery</button></div><div class="glass-card p-6 rounded-2xl"><h3 class="text-xl font-bold mb-4">Current Gallery</h3><div id="galleryList" class="space-y-3 max-h-96 overflow-y-auto"></div></div></div>
     <div id="adminTestimonials" class="hidden"><div class="glass-card p-6 rounded-2xl mb-6"><h3 class="text-xl font-bold mb-4">Add Testimonial</h3><input type="text" id="testimonialName" placeholder="Client Name" class="form-input mb-3"><input type="text" id="testimonialPosition" placeholder="Position" class="form-input mb-3"><input type="url" id="testimonialImage" placeholder="Image URL" class="form-input mb-3"><textarea id="testimonialContent" rows="3" placeholder="Testimonial" class="form-input mb-3"></textarea><button onclick="addTestimonial()" class="btn-primary w-full">Add Testimonial</button></div><div class="glass-card p-6 rounded-2xl"><h3 class="text-xl font-bold mb-4">Current Testimonials</h3><div id="testimonialsList" class="space-y-3 max-h-96 overflow-y-auto"></div></div></div>
     <div id="adminBlog" class="hidden"><div class="glass-card p-6 rounded-2xl mb-6"><h3 class="text-xl font-bold mb-4">Create Blog Post</h3><input type="text" id="blogTitle" placeholder="Title" class="form-input mb-3"><input type="url" id="blogImage" placeholder="Image URL" class="form-input mb-3"><textarea id="blogContent" rows="5" placeholder="Content" class="form-input mb-3"></textarea><button onclick="createBlogPost()" class="btn-primary w-full">Publish Post</button></div><div class="glass-card p-6 rounded-2xl"><h3 class="text-xl font-bold mb-4">Manage Posts</h3><div id="blogList" class="space-y-3 max-h-96 overflow-y-auto"></div></div></div>
@@ -104,10 +102,7 @@
 
   <div id="editProfileModal" class="modal hidden"><div class="modal-content"><h3 class="text-2xl font-bold mb-4">Edit Profile</h3><input type="text" id="editName" placeholder="Full name" class="form-input mb-3"><button onclick="saveProfile()" class="btn-primary w-full mb-2">Save Changes</button><button onclick="closeEditProfile()" class="btn-outline w-full">Cancel</button></div></div>
 
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </div>
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
     import { auth, db, ADMIN_EMAIL, ref, get, set, push, onValue, remove, update, GOOGLE_SCRIPT_URL } from './firebase-config.js';
@@ -116,7 +111,10 @@
     
     function showToast(message, type) { const toast = document.createElement('div'); toast.className = `toast-notification toast-${type}`; toast.innerHTML = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
     
-    // Back to Top
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
+    
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -129,7 +127,6 @@
     
     async function loadAnalytics() { const analyticsRef = ref(db, 'analytics'); onValue(analyticsRef, (snapshot) => { const container = document.getElementById('analyticsList'); const analytics = snapshot.val(); if (analytics) { const sorted = Object.entries(analytics).sort((a,b)=>b[1].timestamp - a[1].timestamp).slice(0, 50); container.innerHTML = sorted.map(([id, data]) => `<div class="bg-gray-800 p-3 rounded-lg"><div class="flex justify-between"><span class="font-bold text-orange-400">${data.ip || 'Unknown'}</span><span class="text-xs text-gray-400">${new Date(data.timestamp).toLocaleString()}</span></div><p class="text-sm"><span class="text-gray-400">📍</span> ${data.city || 'Unknown'}, ${data.country || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📱</span> ${data.device || 'Unknown'} | ${data.browser || 'Unknown'}</p><p class="text-sm"><span class="text-gray-400">📄</span> ${data.page || '/'}</p></div>`).join(''); } else { container.innerHTML = '<div class="text-center text-gray-400 py-8">No visitor data yet.</div>'; } }); }
     
-    // Admin CRUD functions (same as before)
     window.addGalleryItem = async () => { const title = document.getElementById('galleryTitle').value; const category = document.getElementById('galleryCategory').value; const imageUrl = document.getElementById('galleryImageUrl').value; if (!title || !imageUrl) { showToast('Please fill in title and image URL', 'error'); return; } await push(ref(db, 'gallery'), { title, category, imageUrl, timestamp: Date.now() }); showToast('Gallery item added!'); document.getElementById('galleryTitle').value = ''; document.getElementById('galleryCategory').value = ''; document.getElementById('galleryImageUrl').value = ''; };
     window.deleteGalleryItem = async (id) => { if (confirm('Delete this item?')) { await remove(ref(db, `gallery/${id}`)); showToast('Deleted'); } };
     window.addTestimonial = async () => { const name = document.getElementById('testimonialName').value; const position = document.getElementById('testimonialPosition').value; const imageUrl = document.getElementById('testimonialImage').value; const content = document.getElementById('testimonialContent').value; if (!name || !content) { showToast('Please fill in name and content', 'error'); return; } await push(ref(db, 'testimonials'), { name, position, imageUrl, content, timestamp: Date.now() }); showToast('Testimonial added!'); document.getElementById('testimonialName').value = ''; document.getElementById('testimonialPosition').value = ''; document.getElementById('testimonialImage').value = ''; document.getElementById('testimonialContent').value = ''; };
