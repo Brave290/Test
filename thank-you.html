@@ -41,10 +41,12 @@
       </div>
       <h1 class="text-3xl md:text-4xl font-bold mb-4">Message Sent! 🎉</h1>
       <p class="text-gray-300 mb-6">Thank you for reaching out to Phantom Creative. I've received your message and will get back to you within 24 hours.</p>
+      
       <div class="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mb-6">
         <i class="fas fa-clock text-orange-500 mr-2"></i>
         <span class="text-gray-300">Response time: Usually within 24 hours</span>
       </div>
+      
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="index.html" class="btn-primary">
           <i class="fas fa-home mr-2"></i>Back to Home
@@ -53,23 +55,39 @@
           <i class="fas fa-envelope mr-2"></i>Send Another Message
         </a>
       </div>
-      <p class="text-gray-500 text-sm mt-6">You can also reach me directly at <span class="text-orange-400">legateakanjimusab@gmail.com</span></p>
+      
+      <p class="text-gray-500 text-sm mt-6">
+        You can also reach me directly at 
+        <span class="text-orange-400">legateakanjimusab@gmail.com</span>
+      </p>
     </div>
+  </div>
+
+  <div class="support-icon" onclick="openSupport()">
+    <i class="fas fa-headset"></i>
+    <span class="support-tooltip">Need help? Chat with us</span>
   </div>
 
   <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script>
+    // Mobile Menu
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navbarMenu = document.getElementById('navbarMenu');
     mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
     
+    // Back to Top
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 300) backToTop.classList.add('show');
       else backToTop.classList.remove('show');
     });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    
+    // Support Email
+    window.openSupport = () => {
+      window.location.href = "mailto:legateakanjimusab@gmail.com?subject=Support Request&body=Hello, I need help with...";
+    };
   </script>
 </body>
 </html>
