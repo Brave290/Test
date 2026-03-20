@@ -20,5 +20,5 @@ export const storage = getStorage(app);
 export const ADMIN_EMAIL = "legateakanjimusab@gmail.com";
 export { ref, get, set, push, onValue, remove, update };
 
-// Google Apps Script URL for Emails
-export const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx28dk192-FqaaB3KqD_1z_HbqOyusG6m0imeO9U0YUHqH3HaAG0reDPAWOwme0tFx4lA/exec";
+// YOUR GOOGLE APPS SCRIPT URL
+export const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYjME28os3PUuAeKAC9ZyaF-IL_QFBvqHR7ybNIPPI_iLttyhGkaGrPQlU_Z6isu9_3A/exec";
