@@ -18,10 +18,15 @@
       <i class="fas fa-crown text-5xl text-orange-500 mb-4"></i>
       <h2 class="text-3xl font-bold gradient-text mb-4">Welcome to Phantom Creative</h2>
       <p class="text-gray-400 mb-6">Please sign in or create an account to access our creative studio</p>
-      <button onclick="window.location.href='login.html'" class="btn-primary w-full mb-3">
-        Sign In / Create Account <i class="fas fa-arrow-right ml-2"></i>
-      </button>
-      <p class="text-gray-500 text-sm">Join our community of creative minds</p>
+      <div class="flex flex-col gap-3">
+        <button onclick="window.location.href='login.html'" class="btn-primary w-full">
+          Sign In <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+        <button onclick="window.location.href='signup.html'" class="btn-outline w-full">
+          Create Account <i class="fas fa-user-plus ml-2"></i>
+        </button>
+      </div>
+      <p class="text-gray-500 text-sm mt-4">Join our community of creative minds</p>
     </div>
   </div>
 
@@ -42,7 +47,7 @@
           <a href="contact.html" class="navbar-link">Contact</a>
         </div>
         <div class="navbar-buttons">
-          <span id="userEmailDisplay" class="text-orange-400 text-sm hidden md:inline"></span>
+          <span id="userEmailDisplay" class="user-email-badge"></span>
           <button id="authButton" class="btn-primary" style="padding: 8px 20px;">
             <i class="fas fa-user mr-2"></i>Account
           </button>
@@ -51,7 +56,7 @@
       </div>
     </nav>
 
-    <!-- Hero Section - Improved -->
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-bg-glow">
         <div class="glow-1"></div>
@@ -132,52 +137,21 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
-        <div>
-          <div class="footer-logo">
-            <i class="fas fa-crown"></i>
-            <span class="gradient-text">Phantom Creative</span>
-          </div>
-          <p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p>
-        </div>
-        <div>
-          <h4 class="footer-title">Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-title">Services</h4>
-          <ul class="footer-links">
-            <li><a href="services.html">Logo Design</a></li>
-            <li><a href="services.html">Brand Identity</a></li>
-            <li><a href="services.html">Marketing Materials</a></li>
-            <li><a href="services.html">Web Design</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="footer-title">Connect</h4>
-          <div class="flex space-x-4">
-            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a>
-            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a>
-          </div>
-        </div>
+        <div><div class="footer-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div>
+        <div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4 class="footer-title">Services</h4><ul class="footer-links"><li><a href="services.html">Logo Design</a></li><li><a href="services.html">Brand Identity</a></li><li><a href="services.html">Marketing Materials</a></li><li><a href="services.html">Web Design</a></li></ul></div>
+        <div><h4 class="footer-title">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p>
-      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div>
     </footer>
   </div>
 
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
+  <div class="support-icon" onclick="openSupport()">
+    <i class="fas fa-headset"></i>
+    <span class="support-tooltip">Need help? Chat with us</span>
   </div>
+
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
     import { auth, ADMIN_EMAIL, db, ref, push, set } from './firebase-config.js';
@@ -187,6 +161,10 @@
     const mainContent = document.getElementById('mainContent');
     const userEmailDisplay = document.getElementById('userEmailDisplay');
     const authButton = document.getElementById('authButton');
+    
+    window.openSupport = () => {
+      window.location.href = "mailto:legateakanjimusab@gmail.com?subject=Support Request&body=Hello, I need help with...";
+    };
     
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navbarMenu = document.getElementById('navbarMenu');
@@ -226,7 +204,7 @@
         authOverlay.style.display = 'none';
         mainContent.style.display = 'block';
         userEmailDisplay.textContent = user.email;
-        userEmailDisplay.style.display = 'inline';
+        userEmailDisplay.style.display = 'inline-block';
         if (user.email === ADMIN_EMAIL) {
           authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
           authButton.onclick = () => window.location.href = 'dashboard.html';
