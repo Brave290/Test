@@ -1,43 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Phantom Creative</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-orange-500/30">
-    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="flex items-center space-x-2 group"><i class="fas fa-crown text-2xl text-orange-500 group-hover:rotate-12 transition-transform"></i><span class="text-2xl font-black gradient-text">Phantom Creative</span></a>
-      <div class="hidden md:flex space-x-8">
-        <a href="index.html" class="nav-link">Home</a><a href="about.html" class="nav-link">About</a><a href="services.html" class="nav-link">Services</a><a href="portfolio.html" class="nav-link">Portfolio</a><a href="blog.html" class="nav-link active">Blog</a><a href="contact.html" class="nav-link">Contact</a>
-      </div>
-      <div class="flex items-center space-x-4"><button id="authButton" onclick="window.location.href='login.html'" class="gradient-bg px-5 py-2 rounded-full font-semibold text-sm hover:scale-105 transition"><i class="fas fa-user mr-2"></i>Sign In</button><button id="mobileMenuBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button></div>
-    </div>
-    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-3"><a href="index.html" class="block py-2 nav-link">Home</a><a href="about.html" class="block py-2 nav-link">About</a><a href="services.html" class="block py-2 nav-link">Services</a><a href="portfolio.html" class="block py-2 nav-link">Portfolio</a><a href="blog.html" class="block py-2 nav-link active">Blog</a><a href="contact.html" class="block py-2 nav-link">Contact</a></div>
-  </nav>
-
-  <section class="pt-32 pb-20 bg-black/40"><div class="container mx-auto px-4 text-center"><h1 class="text-5xl md:text-6xl font-black mb-4">Our <span class="gradient-text">Blog</span></h1><p class="text-xl text-gray-300 max-w-2xl mx-auto">Insights, tips, and stories from the creative world</p></div></section>
-
-  <section class="py-16"><div class="container mx-auto px-4"><div id="blogGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="text-center py-12 col-span-full"><div class="spinner mx-auto mb-4"></div><p class="text-gray-400">Loading blog posts...</p></div></div></div></section>
-
-  <section class="py-20 gradient-bg"><div class="container mx-auto px-4 text-center"><h2 class="text-3xl md:text-4xl font-bold mb-4">Subscribe to Our Newsletter</h2><p class="text-xl text-gray-200 mb-8">Get the latest design tips and trends straight to your inbox</p><form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3"><input type="email" id="newsletterEmail" placeholder="Enter your email" required class="flex-1 px-4 py-3 rounded-lg text-black"><button type="submit" class="bg-white text-orange-600 px-6 py-3 rounded-lg font-bold hover:scale-105 transition">Subscribe <i class="fas fa-arrow-right ml-2"></i></button></form><p id="newsletterMsg" class="text-sm mt-3"></p></div></section>
-
-  <footer class="py-12 border-t border-gray-800"><div class="container mx-auto px-4"><div class="grid md:grid-cols-4 gap-8 mb-8"><div><div class="flex items-center space-x-2 mb-4"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-xl font-black gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div><div><h4 class="font-bold mb-4">Quick Links</h4><ul class="space-y-2 text-gray-500"><li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li><li><a href="about.html" class="hover:text-orange-500 transition">About</a></li><li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li><li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li></ul></div><div><h4 class="font-bold mb-4">Services</h4><ul class="space-y-2 text-gray-500"><li>Logo Design</li><li>Brand Identity</li><li>Marketing Materials</li><li>Web Design</li></ul></div><div><h4 class="font-bold mb-4">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div></div><div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div></div></footer>
-
-  <script type="module">
-    import { auth, ADMIN_EMAIL, db, ref, onValue, push, set, get } from './firebase-config.js';
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn'); const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    onAuthStateChanged(auth, (user) => { const authButton = document.getElementById('authButton'); if (user) { if (user.email === ADMIN_EMAIL) { authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard'; authButton.onclick = () => window.location.href = 'dashboard.html'; } else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account'; authButton.onclick = () => window.location.href = 'dashboard.html'; } } else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In'; authButton.onclick = () => window.location.href = 'login.html'; } });
-    const blogRef = ref(db, 'blog'); onValue(blogRef, (snapshot) => { const container = document.getElementById('blogGrid'); const posts = snapshot.val(); if (posts) { const postsArray = Object.entries(posts).reverse(); container.innerHTML = postsArray.map(([id, post]) => `<div class="blog-card cursor-pointer"><div class="h-48 overflow-hidden"><img src="${post.imageUrl || 'https://via.placeholder.com/400x250?text=Blog+Post'}" alt="${post.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"></div><div class="p-6"><div class="flex items-center gap-2 text-sm text-gray-400 mb-2"><i class="fas fa-calendar-alt"></i>${new Date(post.timestamp).toLocaleDateString()}</div><h3 class="text-xl font-bold mb-2 hover:text-orange-500 transition">${post.title}</h3><p class="text-gray-400">${post.content.substring(0, 100)}...</p></div></div>`).join(''); } else { container.innerHTML = '<div class="text-center text-gray-400 py-12 col-span-full">No blog posts yet. Check back soon!</div>'; } });
-    document.getElementById('newsletterForm')?.addEventListener('submit', async (e) => { e.preventDefault(); const email = document.getElementById('newsletterEmail').value; const msgDiv = document.getElementById('newsletterMsg'); const subscribersRef = ref(db, 'subscribers'); const snapshot = await get(subscribersRef); let exists = false; if (snapshot.exists()) { const subscribers = snapshot.val(); exists = Object.values(subscribers).some(sub => sub.email === email); } if (exists) { msgDiv.innerHTML = 'You\'re already subscribed!'; msgDiv.classList.add('text-green-300'); } else { const newSubRef = push(subscribersRef); await set(newSubRef, { email, subscribedAt: Date.now(), status: 'active' }); msgDiv.innerHTML = '🎉 Subscribed successfully! Welcome to the community!'; msgDiv.classList.add('text-green-300'); document.getElementById('newsletterEmail').value = ''; } setTimeout(() => { msgDiv.innerHTML = ''; }, 5000); });
-  </script>
-</body>
-</html>
+<script type="module">
+  import { auth, ADMIN_EMAIL, db, ref, onValue, push, set, get, GOOGLE_SCRIPT_URL } from './firebase-config.js';
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+  
+  // ... rest of your blog code ...
+  
+  // Newsletter Signup (same as contact.html)
+  document.getElementById('newsletterForm')?.addEventListener('submit', async (e) => { 
+    e.preventDefault(); 
+    const email = document.getElementById('newsletterEmail').value; 
+    const msgDiv = document.getElementById('newsletterMsg'); 
+    const subscribersRef = ref(db, 'subscribers'); 
+    const snapshot = await get(subscribersRef); 
+    let exists = false; 
+    if (snapshot.exists()) { 
+      const subscribers = snapshot.val(); 
+      exists = Object.values(subscribers).some(sub => sub.email === email); 
+    } 
+    if (exists) { 
+      msgDiv.innerHTML = 'You\'re already subscribed!'; 
+      msgDiv.classList.add('text-green-300'); 
+    } else { 
+      const newSubRef = push(subscribersRef); 
+      await set(newSubRef, { email, subscribedAt: Date.now(), status: 'active' }); 
+      
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'newsletter', email: email })
+      });
+      
+      msgDiv.innerHTML = '🎉 Subscribed successfully! Check your email for a welcome message!'; 
+      msgDiv.classList.add('text-green-300'); 
+      document.getElementById('newsletterEmail').value = ''; 
+    } 
+    setTimeout(() => { msgDiv.innerHTML = ''; }, 5000); 
+  });
+</script>
