@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://js.paystack.co/v1/inline.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <!-- Firebase SDKs (Modular Web) v12.11.0 -->
+  <!-- Firebase SDKs (Modular Web) -->
   <script type="importmap">
     {
       "imports": {
@@ -40,6 +40,8 @@
     ::-webkit-scrollbar { width: 5px; background: #111; }
     ::-webkit-scrollbar-thumb { background: #ff5e00; border-radius: 10px; }
     input, textarea { outline: none; }
+    .auth-tab { transition: 0.2s; cursor: pointer; }
+    .auth-tab.active { border-bottom: 2px solid #ff5e00; color: #ff5e00; }
   </style>
 </head>
 <body class="grid-bg">
@@ -142,16 +144,49 @@
     </div>
   </div>
 
-  <!-- AUTH MODAL: Google Sign-In (only method) -->
-  <div id="authModalOverlay" class="fixed inset-0 hidden bg-black/95 backdrop-blur-lg flex items-center justify-center z-50">
-    <div class="bg-black border border-orange-500 rounded-2xl p-8 w-96 text-center shadow-2xl">
-      <h2 class="text-orange-500 text-3xl font-black mb-2">PHANTOM ACCESS</h2>
-      <p class="text-gray-300 text-sm mb-6">Sign in with Google to unlock dashboard & cloud storage</p>
-      <button id="googleSignInBtn" class="bg-white text-black font-bold w-full py-3 rounded-full flex items-center justify-center gap-3 transition hover:bg-orange-100">
-        <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        Sign in with Google
-      </button>
-      <button onclick="closeAuthPanel()" class="text-gray-500 text-sm mt-6 w-full">Cancel</button>
+  <!-- AUTH MODAL: Google + Email/Password Combined -->
+  <div id="authModalOverlay" class="fixed inset-0 hidden bg-black/95 backdrop-blur-lg flex items-center justify-center z-50 overflow-y-auto py-10">
+    <div class="bg-black border border-orange-500 rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl">
+      <!-- Tabs -->
+      <div class="flex border-b border-gray-700 mb-6">
+        <div class="auth-tab active w-1/2 text-center py-2 font-bold" data-tab="login">LOGIN</div>
+        <div class="auth-tab w-1/2 text-center py-2 font-bold text-gray-400" data-tab="signup">SIGN UP</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div id="loginForm" class="auth-form">
+        <h2 class="text-orange-500 text-2xl font-black mb-4 text-center">WELCOME BACK</h2>
+        <input id="loginEmail" type="email" placeholder="Email address" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl mb-3 text-white">
+        <input id="loginPassword" type="password" placeholder="Password" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl mb-4 text-white">
+        <button onclick="loginWithEmail()" class="btn-grad w-full py-3 rounded-full font-bold text-black mb-4">Login with Email</button>
+        <div class="relative my-4">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-700"></div></div>
+          <div class="relative flex justify-center text-xs uppercase"><span class="bg-black px-2 text-gray-400">Or continue with</span></div>
+        </div>
+        <button id="googleSignInBtn" class="bg-white text-black font-bold w-full py-3 rounded-full flex items-center justify-center gap-3 transition hover:bg-orange-100">
+          <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign in with Google
+        </button>
+        <button onclick="closeAuthPanel()" class="text-gray-500 text-sm mt-5 w-full">Cancel</button>
+      </div>
+      
+      <!-- Sign Up Form -->
+      <div id="signupForm" class="auth-form hidden">
+        <h2 class="text-orange-500 text-2xl font-black mb-4 text-center">CREATE ACCOUNT</h2>
+        <input id="signupName" type="text" placeholder="Full name (optional)" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl mb-3 text-white">
+        <input id="signupEmail" type="email" placeholder="Email address" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl mb-3 text-white">
+        <input id="signupPassword" type="password" placeholder="Password (min 6 characters)" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl mb-4 text-white">
+        <button onclick="signUpWithEmail()" class="btn-grad w-full py-3 rounded-full font-bold text-black mb-4">Create Account</button>
+        <div class="relative my-4">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-700"></div></div>
+          <div class="relative flex justify-center text-xs uppercase"><span class="bg-black px-2 text-gray-400">Or continue with</span></div>
+        </div>
+        <button id="googleSignUpBtn" class="bg-white text-black font-bold w-full py-3 rounded-full flex items-center justify-center gap-3 transition hover:bg-orange-100">
+          <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Sign up with Google
+        </button>
+        <button onclick="closeAuthPanel()" class="text-gray-500 text-sm mt-5 w-full">Cancel</button>
+      </div>
     </div>
   </div>
 
@@ -165,10 +200,10 @@
     // FIREBASE MODULAR IMPORTS (v12.11.0) - FULL CONFIGURATION
     // --------------------------------------------------------------
     import { initializeApp } from "firebase/app";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
-    import { getDatabase, ref, set, push, get, remove, child } from "firebase/database";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+    import { getDatabase, ref, set, push, get, remove } from "firebase/database";
 
-    // Your web app's Firebase configuration (exactly as provided)
+    // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCzbWS2nhqlW-Wcvitxdl_prq7Xs766QWA",
       authDomain: "phantom-creative-be7a9.firebaseapp.com",
@@ -186,7 +221,6 @@
     const googleProvider = new GoogleAuthProvider();
     googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-    // ---------- GLOBAL VARIABLES ----------
     let currentPendingAmount = 0;
     let currentUserGlobal = null;
 
@@ -214,10 +248,11 @@
         dashboardDiv.classList.add("hidden");
         publicDiv.classList.remove("hidden");
         if (loginBtnNav) loginBtnNav.style.display = "flex";
+        currentUserGlobal = null;
       }
     }
 
-    // Load files from Firebase RTDB (users/{uid}/files)
+    // Load files from Firebase RTDB
     async function loadUserFilesFromCloud(uid) {
       const filesRef = ref(db, `users/${uid}/files`);
       try {
@@ -228,7 +263,7 @@
           return;
         }
         const filesObj = snapshot.val();
-        const filesArray = Object.entries(filesObj).map(([key, val]) => ({ key, name: val.name, data: val.data }));
+        const filesArray = Object.entries(filesObj).map(([key, val]) => ({ key, name: val.name }));
         if (filesArray.length === 0) {
           fileListContainer.innerHTML = "<li class='text-gray-400'>No files uploaded.</li>";
           return;
@@ -245,7 +280,7 @@
       }
     }
 
-    // Upload file (base64) to Firebase
+    // Upload file to cloud
     window.uploadFileToCloud = async () => {
       if (!currentUserGlobal) { showToastMessage("Please login first", true); return; }
       const fileInput = document.getElementById("cloudFileInput");
@@ -287,7 +322,7 @@
       }
     };
 
-    // Save order to Firebase (global orders collection)
+    // Save order to Firebase
     async function saveOrderToDatabase(email, amountKobo, reference) {
       try {
         const ordersRef = ref(db, "orders");
@@ -300,13 +335,12 @@
           userId: currentUserGlobal ? currentUserGlobal.uid : "guest",
           userEmail: currentUserGlobal ? currentUserGlobal.email : email
         });
-        console.log("Order saved to Firebase RTDB");
       } catch (err) {
         console.error("Order save error", err);
       }
     }
 
-    // Admin view orders (global)
+    // Admin view orders
     window.globalAdminViewOrders = async () => {
       try {
         const ordersRef = ref(db, "orders");
@@ -336,7 +370,7 @@
     // PAYMENT FLOW
     window.triggerPaymentFlow = (amountKobo) => {
       if (!currentUserGlobal) {
-        showToastMessage("Please login with Google to proceed", true);
+        showToastMessage("Please login with Google or Email to proceed", true);
         openAuthPanel();
         return;
       }
@@ -353,7 +387,7 @@
       const amountToPay = currentPendingAmount;
       if (!amountToPay) return;
       const handler = PaystackPop.setup({
-        key: 'pk_test_xxxxxxxxxxxxxx',  // IMPORTANT: Replace with your live/test public key
+        key: 'pk_test_xxxxxxxxxxxxxx',
         email: email,
         amount: amountToPay,
         currency: "NGN",
@@ -375,7 +409,59 @@
       document.getElementById("paymentModal").classList.add("hidden");
     };
 
-    // Google Sign-In (active)
+    // EMAIL/PASSWORD AUTHENTICATION
+    window.signUpWithEmail = async () => {
+      const name = document.getElementById("signupName").value;
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      
+      if (!email || !password) {
+        showToastMessage("Please fill all fields", true);
+        return;
+      }
+      if (password.length < 6) {
+        showToastMessage("Password must be at least 6 characters", true);
+        return;
+      }
+      
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        if (name) {
+          await updateProfile(userCredential.user, { displayName: name });
+        }
+        showToastMessage(`Account created! Welcome ${name || email}`);
+        closeAuthPanel();
+      } catch (error) {
+        let errorMsg = error.message;
+        if (error.code === 'auth/email-already-in-use') errorMsg = "Email already registered";
+        else if (error.code === 'auth/weak-password') errorMsg = "Password too weak";
+        showToastMessage(errorMsg, true);
+      }
+    };
+
+    window.loginWithEmail = async () => {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      
+      if (!email || !password) {
+        showToastMessage("Please enter email and password", true);
+        return;
+      }
+      
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        showToastMessage(`Welcome back, ${userCredential.user.email}`);
+        closeAuthPanel();
+      } catch (error) {
+        let errorMsg = "Invalid email or password";
+        if (error.code === 'auth/user-not-found') errorMsg = "No account found with this email";
+        else if (error.code === 'auth/wrong-password') errorMsg = "Wrong password";
+        else if (error.code === 'auth/too-many-requests') errorMsg = "Too many attempts. Try again later";
+        showToastMessage(errorMsg, true);
+      }
+    };
+
+    // Google Sign-In
     async function handleGoogleSignIn() {
       try {
         const result = await signInWithPopup(auth, googleProvider);
@@ -387,12 +473,11 @@
       }
     }
 
-    // Logout function
+    // Logout
     window.performLogout = async () => {
       await signOut(auth);
       showToastMessage("Logged out successfully");
       updateUIByAuth(null);
-      currentUserGlobal = null;
     };
 
     // Auth panel control
@@ -402,6 +487,30 @@
     window.closeAuthPanel = () => {
       document.getElementById("authModalOverlay").classList.add("hidden");
     };
+    
+    // Tab switching
+    const loginTab = document.querySelector('[data-tab="login"]');
+    const signupTab = document.querySelector('[data-tab="signup"]');
+    const loginFormDiv = document.getElementById("loginForm");
+    const signupFormDiv = document.getElementById("signupForm");
+    
+    loginTab.addEventListener("click", () => {
+      loginTab.classList.add("active");
+      signupTab.classList.remove("active");
+      signupTab.classList.add("text-gray-400");
+      loginTab.classList.remove("text-gray-400");
+      loginFormDiv.classList.remove("hidden");
+      signupFormDiv.classList.add("hidden");
+    });
+    
+    signupTab.addEventListener("click", () => {
+      signupTab.classList.add("active");
+      loginTab.classList.remove("active");
+      loginTab.classList.add("text-gray-400");
+      signupTab.classList.remove("text-gray-400");
+      signupFormDiv.classList.remove("hidden");
+      loginFormDiv.classList.add("hidden");
+    });
     
     // AI Tools
     window.generateAIPrompt = () => {
@@ -435,32 +544,11 @@
       }
     });
 
-    // Attach google sign-in event to button
+    // Attach google sign-in buttons
     document.getElementById("googleSignInBtn").addEventListener("click", handleGoogleSignIn);
+    document.getElementById("googleSignUpBtn").addEventListener("click", handleGoogleSignIn);
     
-    // Initial check: ensure UI sync
-    if (auth.currentUser) {
-      updateUIByAuth(auth.currentUser);
-      currentUserGlobal = auth.currentUser;
-    } else {
-      updateUIByAuth(null);
-    }
-
-    // Expose additional helpers globally
     window.showToastMessage = showToastMessage;
-  </script>
-  <script type="text/javascript">
-    // fallback legacy / non-module helpers
-    function openAuthPanel() { 
-      const modal = document.getElementById("authModalOverlay");
-      if(modal) modal.classList.remove("hidden");
-    }
-    function closeAuthPanel() {
-      const modal = document.getElementById("authModalOverlay");
-      if(modal) modal.classList.add("hidden");
-    }
-    window.openAuthPanel = openAuthPanel;
-    window.closeAuthPanel = closeAuthPanel;
   </script>
 </body>
 </html>
