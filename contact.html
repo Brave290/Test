@@ -23,90 +23,84 @@
 
   <div id="mainContent">
     <section class="pt-32 pb-20 bg-black/40"><div class="container mx-auto px-4 text-center"><h1 class="text-5xl md:text-6xl font-black mb-4">Get In <span class="gradient-text">Touch</span></h1><p class="text-xl text-gray-300 max-w-2xl mx-auto">Have a project in mind? Let's create something amazing together!</p></div></section>
-    <section class="py-16"><div class="container mx-auto px-4"><div class="grid lg:grid-cols-2 gap-12"><div class="glass-card p-8 rounded-2xl"><h3 class="text-2xl font-bold mb-6">Send us a message</h3><form id="contactForm"><div class="mb-4"><input type="text" id="contactName" placeholder="Your Name *" required class="form-input"></div><div class="mb-4"><input type="email" id="contactEmail" placeholder="Email Address *" required class="form-input"></div><div class="mb-4"><input type="text" id="contactSubject" placeholder="Subject" class="form-input"></div><div class="mb-6"><textarea id="contactMessage" rows="5" placeholder="Message *" required class="form-input"></textarea></div><button type="submit" class="btn-primary w-full">Send Message <i class="fas fa-paper-plane ml-2"></i></button></form></div><div class="space-y-8"><div class="glass-card p-8 rounded-2xl"><h3 class="text-2xl font-bold mb-6">Contact Information</h3><div class="space-y-4"><div class="flex items-start gap-4"><i class="fas fa-envelope text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Email</p><p class="text-gray-400">legateakanjimusab@gmail.com</p></div></div><div class="flex items-start gap-4"><i class="fas fa-phone-alt text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Phone</p><p class="text-gray-400">+234 (0) 915 118 688</p></div></div><div class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Address</p><p class="text-gray-400">Lagos, Nigeria</p></div></div></div></div><div class="glass-card p-8 rounded-2xl"><h3 class="text-2xl font-bold mb-6">Business Hours</h3><div class="space-y-2 text-gray-400"><p>Monday - Friday: 9:00 AM - 6:00 PM</p><p>Saturday: 10:00 AM - 4:00 PM</p><p>Sunday: Closed</p></div></div></div></div></div></section>
+    
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div class="glass-card p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold mb-6">Send us a message</h3>
+            <form id="contactForm" action="https://formspree.io/f/mzdjwjjw" method="POST">
+              <div class="mb-4">
+                <input type="text" name="name" id="contactName" placeholder="Your Name *" required class="form-input">
+              </div>
+              <div class="mb-4">
+                <input type="email" name="email" id="contactEmail" placeholder="Email Address *" required class="form-input">
+              </div>
+              <div class="mb-4">
+                <input type="text" name="subject" id="contactSubject" placeholder="Subject" class="form-input">
+              </div>
+              <div class="mb-6">
+                <textarea name="message" id="contactMessage" rows="5" placeholder="Message *" required class="form-input"></textarea>
+              </div>
+              <input type="hidden" name="_next" value="https://phantom-creative.vercel.app/thank-you.html">
+              <button type="submit" class="btn-primary w-full">Send Message <i class="fas fa-paper-plane ml-2"></i></button>
+            </form>
+          </div>
+          <div class="space-y-8">
+            <div class="glass-card p-8 rounded-2xl">
+              <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+              <div class="space-y-4">
+                <div class="flex items-start gap-4"><i class="fas fa-envelope text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Email</p><p class="text-gray-400">legateakanjimusab@gmail.com</p></div></div>
+                <div class="flex items-start gap-4"><i class="fas fa-phone-alt text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Phone</p><p class="text-gray-400">+234 (0) 915 118 688</p></div></div>
+                <div class="flex items-start gap-4"><i class="fas fa-map-marker-alt text-orange-500 text-2xl mt-1"></i><div><p class="font-semibold">Address</p><p class="text-gray-400">Lagos, Nigeria</p></div></div>
+              </div>
+            </div>
+            <div class="glass-card p-8 rounded-2xl">
+              <h3 class="text-2xl font-bold mb-6">Business Hours</h3>
+              <div class="space-y-2 text-gray-400"><p>Monday - Friday: 9:00 AM - 6:00 PM</p><p>Saturday: 10:00 AM - 4:00 PM</p><p>Sunday: Closed</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="py-20 gradient-bg"><div class="container mx-auto px-4 text-center"><i class="fas fa-envelope-open-text text-5xl mb-4"></i><h2 class="text-3xl md:text-4xl font-bold mb-4">Subscribe to Our Newsletter</h2><p class="text-xl text-gray-200 mb-8">Get design tips, trends, and exclusive offers straight to your inbox</p><form id="newsletterForm" class="max-w-md mx-auto flex flex-col sm:flex-row gap-3"><input type="email" id="newsletterEmail" placeholder="Enter your email" required class="flex-1 px-4 py-3 rounded-lg text-black"><button type="submit" class="bg-white text-orange-600 px-6 py-3 rounded-lg font-bold hover:scale-105 transition">Subscribe <i class="fas fa-arrow-right ml-2"></i></button></form><p id="newsletterMsg" class="text-sm mt-3"></p></div></section>
-    <footer class="py-12 border-t border-gray-800"><div class="container mx-auto px-4"><div class="grid md:grid-cols-4 gap-8 mb-8"><div><div class="flex items-center space-x-2 mb-4"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-xl font-black gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div><div><h4 class="font-bold mb-4">Quick Links</h4><ul class="space-y-2 text-gray-500"><li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li><li><a href="about.html" class="hover:text-orange-500 transition">About</a></li><li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li><li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li></ul></div><div><h4 class="font-bold mb-4">Services</h4><ul class="space-y-2 text-gray-500"><li>Logo Design</li><li>Brand Identity</li><li>Marketing Materials</li><li>Web Design</li></ul></div><div><h4 class="font-bold mb-4">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div></div><div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div></div></footer>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div><div class="footer-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div>
+        <div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4 class="footer-title">Services</h4><ul class="footer-links"><li><a href="services.html">Logo Design</a></li><li><a href="services.html">Brand Identity</a></li><li><a href="services.html">Marketing Materials</a></li><li><a href="services.html">Web Design</a></li></ul></div>
+        <div><h4 class="footer-title">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div>
+    </footer>
   </div>
 
   <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
-    import { auth, ADMIN_EMAIL, db, ref, push, set, get, GOOGLE_SCRIPT_URL } from './firebase-config.js';
+    import { auth, ADMIN_EMAIL, db, ref, push, set, get, FORMSPREE_ID } from './firebase-config.js';
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     
     function showToast(message, type) { const toast = document.createElement('div'); toast.className = `toast-notification toast-${type}`; toast.innerHTML = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
     
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navbarMenu = document.getElementById('navbarMenu');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn'); const navbarMenu = document.getElementById('navbarMenu');
     mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
-    
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     
     onAuthStateChanged(auth, (user) => {
-      const authButton = document.getElementById('authButton');
-      const userEmailDisplay = document.getElementById('userEmailDisplay');
+      const authButton = document.getElementById('authButton'); const userEmailDisplay = document.getElementById('userEmailDisplay');
       if (user) {
-        userEmailDisplay.textContent = user.email;
-        userEmailDisplay.style.display = 'inline';
-        if (user.email === ADMIN_EMAIL) {
-          authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
-          authButton.onclick = () => window.location.href = 'dashboard.html';
-        } else {
-          authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account';
-          authButton.onclick = () => window.location.href = 'dashboard.html';
-        }
-      } else {
-        authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In';
-        authButton.onclick = () => window.location.href = 'login.html';
-      }
+        userEmailDisplay.textContent = user.email; userEmailDisplay.style.display = 'inline';
+        if (user.email === ADMIN_EMAIL) { authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard'; authButton.onclick = () => window.location.href = 'dashboard.html'; }
+        else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account'; authButton.onclick = () => window.location.href = 'dashboard.html'; }
+      } else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In'; authButton.onclick = () => window.location.href = 'login.html'; }
     });
     
-    document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('contactName').value;
-      const email = document.getElementById('contactEmail').value;
-      const subject = document.getElementById('contactSubject').value;
-      const message = document.getElementById('contactMessage').value;
-      const submitBtn = e.target.querySelector('button');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
-      submitBtn.disabled = true;
-      
-      try {
-        const messagesRef = ref(db, 'messages');
-        const newMsgRef = push(messagesRef);
-        await set(newMsgRef, {
-          name, email, subject: subject || 'No Subject', message,
-          timestamp: Date.now(), status: 'unread'
-        });
-        
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'contact',
-            name: name,
-            email: email,
-            subject: subject || 'No Subject',
-            message: message,
-            timestamp: new Date().toLocaleString()
-          })
-        });
-        
-        showToast('Message sent successfully! I\'ll get back to you soon.', 'success');
-        e.target.reset();
-      } catch (error) {
-        console.error('Error:', error);
-        showToast('Error sending message. Please try again.', 'error');
-      } finally {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }
-    });
-    
+    // Newsletter Signup
     document.getElementById('newsletterForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('newsletterEmail').value;
@@ -124,15 +118,7 @@
       } else {
         const newSubRef = push(subscribersRef);
         await set(newSubRef, { email, subscribedAt: Date.now(), status: 'active' });
-        
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'newsletter', email: email })
-        });
-        
-        msgDiv.innerHTML = '🎉 Subscribed successfully! Check your email for a welcome message!';
+        msgDiv.innerHTML = '🎉 Subscribed successfully! Thank you for joining!';
         msgDiv.classList.add('text-green-300');
         document.getElementById('newsletterEmail').value = '';
       }
