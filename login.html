@@ -11,74 +11,42 @@
 </head>
 <body class="bg-black">
 
-  <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-orange-500/30">
-    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="flex items-center space-x-2"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-2xl font-black gradient-text">Phantom Creative</span></a>
-      <button onclick="window.location.href='index.html'" class="text-gray-400 hover:text-orange-500 transition"><i class="fas fa-home mr-1"></i> Home</button>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></a>
+      <div class="navbar-menu" id="navbarMenu">
+        <a href="index.html" class="navbar-link">Home</a><a href="about.html" class="navbar-link">About</a><a href="services.html" class="navbar-link">Services</a><a href="portfolio.html" class="navbar-link">Portfolio</a><a href="blog.html" class="navbar-link">Blog</a><a href="contact.html" class="navbar-link">Contact</a>
+      </div>
+      <div class="navbar-buttons"><button onclick="window.location.href='index.html'" class="btn-outline" style="padding: 8px 20px;"><i class="fas fa-home mr-2"></i>Home</button><button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button></div>
     </div>
   </nav>
 
   <section class="min-h-screen flex items-center justify-center pt-20">
     <div class="container mx-auto px-4 max-w-md">
       <div class="glass-card rounded-2xl p-8 animate-fadeInUp">
-        <div class="text-center mb-8">
-          <i class="fas fa-crown text-5xl text-orange-500 mb-3"></i>
-          <h2 class="text-3xl font-bold gradient-text">Welcome Back</h2>
-          <p class="text-gray-400 mt-2">Sign in to access your creative dashboard</p>
-        </div>
-        
-        <div class="flex mb-6 border-b border-gray-700">
-          <button onclick="switchTab('login')" id="loginTabBtn" class="flex-1 py-2 text-center font-semibold border-b-2 border-orange-500">Sign In</button>
-          <button onclick="switchTab('signup')" id="signupTabBtn" class="flex-1 py-2 text-center font-semibold text-gray-400">Create Account</button>
-        </div>
-        
-        <div id="loginForm">
-          <input type="email" id="loginEmail" placeholder="Email address" class="form-input mb-4">
-          <input type="password" id="loginPassword" placeholder="Password" class="form-input mb-4">
-          <button onclick="login()" class="btn-primary w-full mb-3">Sign In <i class="fas fa-arrow-right ml-2"></i></button>
-          <button onclick="forgotPassword()" class="text-orange-500 text-sm hover:underline w-full text-center">Forgot Password?</button>
-        </div>
-        
-        <div id="signupForm" class="hidden">
-          <input type="text" id="signupName" placeholder="Full name" class="form-input mb-4">
-          <input type="email" id="signupEmail" placeholder="Email address" class="form-input mb-4">
-          <input type="password" id="signupPassword" placeholder="Password (min 6 characters)" class="form-input mb-4">
-          <input type="password" id="signupConfirmPassword" placeholder="Confirm password" class="form-input mb-4">
-          <button onclick="signup()" class="btn-primary w-full">Create Account <i class="fas fa-user-plus ml-2"></i></button>
-        </div>
-        
-        <div class="mt-6 text-center">
-          <a href="index.html" class="text-gray-500 text-sm hover:text-gray-400">
-            <i class="fas fa-arrow-left mr-1"></i> Back to Home
-          </a>
-        </div>
+        <div class="text-center mb-8"><i class="fas fa-crown text-5xl text-orange-500 mb-3"></i><h2 class="text-3xl font-bold gradient-text">Welcome Back</h2><p class="text-gray-400 mt-2">Sign in to access your creative dashboard</p></div>
+        <div class="flex mb-6 border-b border-gray-700"><button onclick="switchTab('login')" id="loginTabBtn" class="flex-1 py-2 text-center font-semibold border-b-2 border-orange-500">Sign In</button><button onclick="switchTab('signup')" id="signupTabBtn" class="flex-1 py-2 text-center font-semibold text-gray-400">Create Account</button></div>
+        <div id="loginForm"><input type="email" id="loginEmail" placeholder="Email address" class="form-input mb-4"><input type="password" id="loginPassword" placeholder="Password" class="form-input mb-4"><button onclick="login()" class="btn-primary w-full mb-3">Sign In <i class="fas fa-arrow-right ml-2"></i></button><button onclick="forgotPassword()" class="text-orange-500 text-sm hover:underline w-full text-center">Forgot Password?</button></div>
+        <div id="signupForm" class="hidden"><input type="text" id="signupName" placeholder="Full name" class="form-input mb-4"><input type="email" id="signupEmail" placeholder="Email address" class="form-input mb-4"><input type="password" id="signupPassword" placeholder="Password (min 6 characters)" class="form-input mb-4"><input type="password" id="signupConfirmPassword" placeholder="Confirm password" class="form-input mb-4"><button onclick="signup()" class="btn-primary w-full">Create Account <i class="fas fa-user-plus ml-2"></i></button></div>
+        <div class="mt-6 text-center"><a href="index.html" class="text-gray-500 text-sm hover:text-gray-400"><i class="fas fa-arrow-left mr-1"></i> Back to Home</a></div>
       </div>
     </div>
   </section>
 
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
-  </div>
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
     import { auth, db, ref, set, GOOGLE_SCRIPT_URL } from './firebase-config.js';
     import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     
-    function showToast(message, type) { 
-      const toast = document.createElement('div'); 
-      toast.className = `toast-notification toast-${type}`; 
-      toast.innerHTML = message; 
-      document.body.appendChild(toast); 
-      setTimeout(() => toast.remove(), 3000); 
-    }
+    function showToast(message, type) { const toast = document.createElement('div'); toast.className = `toast-notification toast-${type}`; toast.innerHTML = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
     
-    // Back to Top
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
+    
     const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) backToTop.classList.add('show');
-      else backToTop.classList.remove('show');
-    });
+    window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     
     window.switchTab = (tab) => {
@@ -139,7 +107,6 @@
           role: 'user'
         });
         
-        // Send welcome email via Google Apps Script
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
