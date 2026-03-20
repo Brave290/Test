@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Phantom Creative</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation (same as index.html) -->
+  <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-orange-500/30">
+    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-2 group">
+        <i class="fas fa-crown text-2xl text-orange-500 group-hover:rotate-12 transition-transform"></i>
+        <span class="text-2xl font-black gradient-text">Phantom Creative</span>
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link active">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button id="authButton" onclick="window.location.href='login.html'" class="gradient-bg px-5 py-2 rounded-full font-semibold text-sm hover:scale-105 transition">
+          <i class="fas fa-user mr-2"></i>Sign In
+        </button>
+        <button id="mobileMenuBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-3">
+      <a href="index.html" class="block py-2 nav-link">Home</a>
+      <a href="about.html" class="block py-2 nav-link">About</a>
+      <a href="services.html" class="block py-2 nav-link active">Services</a>
+      <a href="portfolio.html" class="block py-2 nav-link">Portfolio</a>
+      <a href="blog.html" class="block py-2 nav-link">Blog</a>
+      <a href="contact.html" class="block py-2 nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Services Hero -->
+  <section class="pt-32 pb-20 text-center">
+    <div class="container mx-auto px-4">
+      <h1 class="text-5xl md:text-6xl font-black mb-4">Our <span class="gradient-text">Services</span></h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">Comprehensive design solutions tailored to your brand's unique needs</p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-pen-fancy text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Logo Design</h3>
+          <p class="text-gray-400 mb-4">Unique, memorable logos that capture your brand essence and make lasting impressions.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦5,000</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-palette text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Brand Identity</h3>
+          <p class="text-gray-400 mb-4">Complete brand packages with color schemes, typography, and brand guidelines.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦50,000</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-chart-line text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Marketing Materials</h3>
+          <p class="text-gray-400 mb-4">Flyers, posters, social media graphics that convert viewers into customers.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦5,000</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-globe text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Web Design</h3>
+          <p class="text-gray-400 mb-4">Stunning, responsive websites that engage visitors and drive conversions.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦200,000</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-video text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Motion Graphics</h3>
+          <p class="text-gray-400 mb-4">Animated logos, explainer videos, and engaging motion content.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦100,000</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl text-center group">
+          <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+            <i class="fas fa-package text-3xl text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Packaging Design</h3>
+          <p class="text-gray-400 mb-4">Eye-catching packaging that stands out on shelves and tells your story.</p>
+          <p class="text-orange-500 font-bold">Starting from ₦80,000</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="py-20 bg-black/40">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-black mb-4">Our <span class="gradient-text">Process</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">How we bring your vision to life</p>
+      </div>
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div><h3 class="font-bold mb-2">Discovery</h3><p class="text-gray-400 text-sm">Understanding your brand and goals</p></div>
+        <div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div><h3 class="font-bold mb-2">Research</h3><p class="text-gray-400 text-sm">Market analysis and creative direction</p></div>
+        <div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div><h3 class="font-bold mb-2">Creation</h3><p class="text-gray-400 text-sm">Design development and iterations</p></div>
+        <div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div><h3 class="font-bold mb-2">Delivery</h3><p class="text-gray-400 text-sm">Final assets and ongoing support</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to elevate your brand?</h2>
+      <p class="text-xl text-gray-200 mb-8">Let's discuss your project</p>
+      <a href="contact.html" class="bg-white text-orange-600 px-8 py-3 rounded-full font-bold hover:scale-105 transition inline-block">Get a Quote</a>
+    </div>
+  </section>
+
+  <!-- Footer (same as index.html) -->
+  <footer class="py-12 border-t border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div><div class="flex items-center space-x-2 mb-4"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-xl font-black gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div>
+        <div><h4 class="font-bold mb-4">Quick Links</h4><ul class="space-y-2 text-gray-500"><li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li><li><a href="about.html" class="hover:text-orange-500 transition">About</a></li><li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li><li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li></ul></div>
+        <div><h4 class="font-bold mb-4">Services</h4><ul class="space-y-2 text-gray-500"><li>Logo Design</li><li>Brand Identity</li><li>Marketing Materials</li><li>Web Design</li></ul></div>
+        <div><h4 class="font-bold mb-4">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div>
+      </div>
+      <div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800">
+        <p>&copy; 2024 Phantom Creative. All rights reserved. | Crafted with <i class="fas fa-heart text-orange-500"></i> for visionary brands</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { auth, ADMIN_EMAIL } from './firebase-config.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    onAuthStateChanged(auth, (user) => {
+      const authButton = document.getElementById('authButton');
+      if (user) {
+        if (user.email === ADMIN_EMAIL) {
+          authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
+          authButton.onclick = () => window.location.href = 'dashboard.html';
+        } else {
+          authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account';
+          authButton.onclick = () => window.location.href = 'dashboard.html';
+        }
+      } else {
+        authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In';
+        authButton.onclick = () => window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>

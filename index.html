@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phantom Creative | Premium Graphics Design Studio</title>
+  <meta name="description" content="Professional graphics design services for forward-thinking businesses. Logo design, branding, and creative solutions.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-orange-500/30">
+    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-2 group">
+        <i class="fas fa-crown text-2xl text-orange-500 group-hover:rotate-12 transition-transform"></i>
+        <span class="text-2xl font-black gradient-text">Phantom Creative</span>
+      </a>
+      <div class="hidden md:flex space-x-8">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <button id="authButton" onclick="window.location.href='login.html'" class="gradient-bg px-5 py-2 rounded-full font-semibold text-sm hover:scale-105 transition">
+          <i class="fas fa-user mr-2"></i>Sign In
+        </button>
+        <button id="mobileMenuBtn" class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 space-y-3">
+      <a href="index.html" class="block py-2 nav-link active">Home</a>
+      <a href="about.html" class="block py-2 nav-link">About</a>
+      <a href="services.html" class="block py-2 nav-link">Services</a>
+      <a href="portfolio.html" class="block py-2 nav-link">Portfolio</a>
+      <a href="blog.html" class="block py-2 nav-link">Blog</a>
+      <a href="contact.html" class="block py-2 nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <section class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-30">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full blur-[100px]"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-600 rounded-full blur-[120px]"></div>
+    </div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <div class="animate-fadeInUp">
+        <div class="inline-block px-4 py-2 rounded-full bg-orange-500/20 border border-orange-500/50 mb-6">
+          <span class="text-orange-400 text-sm">✨ Award-Winning Design Studio</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+          Transform Your Vision Into <span class="gradient-text">Digital Masterpieces</span>
+        </h1>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Premium graphics design services that elevate your brand identity. Logo design, branding, and creative solutions for forward-thinking businesses.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="services.html" class="btn-primary">Explore Services <i class="fas fa-arrow-right ml-2"></i></a>
+          <a href="portfolio.html" class="btn-outline">View Portfolio <i class="fas fa-images ml-2"></i></a>
+        </div>
+        <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-12">
+          <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">500+</div><div class="text-gray-400 text-sm">Projects</div></div>
+          <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">200+</div><div class="text-gray-400 text-sm">Clients</div></div>
+          <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">15+</div><div class="text-gray-400 text-sm">Awards</div></div>
+          <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">24/7</div><div class="text-gray-400 text-sm">Support</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-black/40">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-black mb-4">What <span class="gradient-text">We Do</span></h2>
+        <p class="text-gray-400 max-w-2xl mx-auto">Comprehensive design solutions tailored to your brand's unique needs</p>
+      </div>
+      <div id="servicesGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-pen-fancy text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Logo Design</h3>
+          <p class="text-gray-400 text-sm">Unique, memorable logos that capture your brand essence</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-palette text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Brand Identity</h3>
+          <p class="text-gray-400 text-sm">Complete brand packages with color schemes and typography</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-chart-line text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Marketing Materials</h3>
+          <p class="text-gray-400 text-sm">Flyers, posters, social media graphics that convert</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+            <i class="fas fa-globe text-2xl text-white"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Web Design</h3>
+          <p class="text-gray-400 text-sm">Stunning, responsive websites that engage visitors</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 gradient-bg">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Brand?</h2>
+      <p class="text-xl text-gray-200 mb-8">Let's create something amazing together</p>
+      <a href="contact.html" class="bg-white text-orange-600 px-8 py-3 rounded-full font-bold hover:scale-105 transition inline-block">
+        Start Your Project <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-12 border-t border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fas fa-crown text-2xl text-orange-500"></i>
+            <span class="text-xl font-black gradient-text">Phantom Creative</span>
+          </div>
+          <p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-500">
+            <li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li>
+            <li><a href="about.html" class="hover:text-orange-500 transition">About</a></li>
+            <li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li>
+            <li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Services</h4>
+          <ul class="space-y-2 text-gray-500">
+            <li>Logo Design</li>
+            <li>Brand Identity</li>
+            <li>Marketing Materials</li>
+            <li>Web Design</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Connect</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a>
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800">
+        <p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { auth, ADMIN_EMAIL } from './firebase-config.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    
+    onAuthStateChanged(auth, (user) => {
+      const authButton = document.getElementById('authButton');
+      if (user) {
+        if (user.email === ADMIN_EMAIL) {
+          authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
+          authButton.onclick = () => window.location.href = 'dashboard.html';
+        } else {
+          authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account';
+          authButton.onclick = () => window.location.href = 'dashboard.html';
+        }
+      } else {
+        authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In';
+        authButton.onclick = () => window.location.href = 'login.html';
+      }
+    });
+  </script>
+</body>
+</html>
