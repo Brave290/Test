@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Sent | Phantom Creative</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black">
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-crown"></i>
+        <span class="gradient-text">Phantom Creative</span>
+      </a>
+      <div class="navbar-menu" id="navbarMenu">
+        <a href="index.html" class="navbar-link">Home</a>
+        <a href="about.html" class="navbar-link">About</a>
+        <a href="services.html" class="navbar-link">Services</a>
+        <a href="portfolio.html" class="navbar-link">Portfolio</a>
+        <a href="blog.html" class="navbar-link">Blog</a>
+        <a href="contact.html" class="navbar-link">Contact</a>
+      </div>
+      <div class="navbar-buttons">
+        <button onclick="window.location.href='login.html'" class="btn-primary" style="padding: 8px 20px;">
+          <i class="fas fa-user mr-2"></i>Sign In
+        </button>
+        <button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="thankyou-container">
+    <div class="thankyou-card glass-card p-8 rounded-2xl text-center animate-fadeInUp">
+      <div class="check-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">Message Sent! 🎉</h1>
+      <p class="text-gray-300 mb-6">Thank you for reaching out to Phantom Creative. I've received your message and will get back to you within 24 hours.</p>
+      <div class="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mb-6">
+        <i class="fas fa-clock text-orange-500 mr-2"></i>
+        <span class="text-gray-300">Response time: Usually within 24 hours</span>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="index.html" class="btn-primary">
+          <i class="fas fa-home mr-2"></i>Back to Home
+        </a>
+        <a href="contact.html" class="btn-outline">
+          <i class="fas fa-envelope mr-2"></i>Send Another Message
+        </a>
+      </div>
+      <p class="text-gray-500 text-sm mt-6">You can also reach me directly at <span class="text-orange-400">legateakanjimusab@gmail.com</span></p>
+    </div>
+  </div>
+
+  <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+  <script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
+    
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  </script>
+</body>
+</html>
