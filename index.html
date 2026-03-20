@@ -27,14 +27,12 @@
 
   <!-- Main Content (Hidden until logged in) -->
   <div id="mainContent" style="display: none;">
-    <!-- Navbar -->
     <nav class="navbar">
       <div class="navbar-container">
         <a href="index.html" class="navbar-logo">
           <i class="fas fa-crown"></i>
           <span class="gradient-text">Phantom Creative</span>
         </a>
-        
         <div class="navbar-menu" id="navbarMenu">
           <a href="index.html" class="navbar-link active">Home</a>
           <a href="about.html" class="navbar-link">About</a>
@@ -43,46 +41,39 @@
           <a href="blog.html" class="navbar-link">Blog</a>
           <a href="contact.html" class="navbar-link">Contact</a>
         </div>
-        
         <div class="navbar-buttons">
           <span id="userEmailDisplay" class="text-orange-400 text-sm hidden md:inline"></span>
           <button id="authButton" class="btn-primary" style="padding: 8px 20px;">
             <i class="fas fa-user mr-2"></i>Account
           </button>
-          <button class="navbar-toggle" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-          </button>
+          <button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
         </div>
       </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-      <div class="absolute inset-0 opacity-30">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full blur-[100px]"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-600 rounded-full blur-[120px]"></div>
+    <!-- Hero Section - Improved -->
+    <section class="hero">
+      <div class="hero-bg-glow">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
       </div>
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <div class="animate-fadeInUp">
-          <div class="inline-block px-4 py-2 rounded-full bg-orange-500/20 border border-orange-500/50 mb-6">
-            <span class="text-orange-400 text-sm">✨ Award-Winning Design Studio</span>
-          </div>
-          <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            Transform Your Vision Into <span class="gradient-text">Digital Masterpieces</span>
-          </h1>
-          <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Premium graphics design services that elevate your brand identity. Logo design, branding, and creative solutions for forward-thinking businesses.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="services.html" class="btn-primary">Explore Services <i class="fas fa-arrow-right ml-2"></i></a>
-            <a href="portfolio.html" class="btn-outline">View Portfolio <i class="fas fa-images ml-2"></i></a>
-          </div>
-          <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-12">
-            <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">500+</div><div class="text-gray-400 text-sm">Projects</div></div>
-            <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">200+</div><div class="text-gray-400 text-sm">Clients</div></div>
-            <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">15+</div><div class="text-gray-400 text-sm">Awards</div></div>
-            <div class="text-center"><div class="text-3xl md:text-4xl font-bold gradient-text">24/7</div><div class="text-gray-400 text-sm">Support</div></div>
-          </div>
+      <div class="hero-content">
+        <div class="hero-badge animate-fadeInUp">✨ Award-Winning Design Studio</div>
+        <h1 class="hero-title animate-fadeInUp">
+          Transform Your Vision Into <span class="gradient-text">Digital Masterpieces</span>
+        </h1>
+        <p class="hero-description animate-fadeInUp">
+          Premium graphics design services that elevate your brand identity. Logo design, branding, and creative solutions for forward-thinking businesses.
+        </p>
+        <div class="hero-buttons animate-fadeInUp">
+          <a href="services.html" class="btn-primary">Explore Services <i class="fas fa-arrow-right ml-2"></i></a>
+          <a href="portfolio.html" class="btn-outline">View Portfolio <i class="fas fa-images ml-2"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">Projects</div></div>
+          <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label">Happy Clients</div></div>
+          <div class="stat-item"><div class="stat-number">15+</div><div class="stat-label">Design Awards</div></div>
+          <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">Support</div></div>
         </div>
       </div>
     </section>
@@ -95,28 +86,28 @@
           <p class="text-gray-400 max-w-2xl mx-auto">Comprehensive design solutions tailored to your brand's unique needs</p>
         </div>
         <div id="servicesGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="glass-card p-6 rounded-2xl text-center group">
             <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-pen-fancy text-2xl text-white"></i>
             </div>
             <h3 class="text-xl font-bold mb-2">Logo Design</h3>
             <p class="text-gray-400 text-sm">Unique, memorable logos that capture your brand essence</p>
           </div>
-          <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="glass-card p-6 rounded-2xl text-center group">
             <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-palette text-2xl text-white"></i>
             </div>
             <h3 class="text-xl font-bold mb-2">Brand Identity</h3>
             <p class="text-gray-400 text-sm">Complete brand packages with color schemes and typography</p>
           </div>
-          <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="glass-card p-6 rounded-2xl text-center group">
             <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-chart-line text-2xl text-white"></i>
             </div>
             <h3 class="text-xl font-bold mb-2">Marketing Materials</h3>
             <p class="text-gray-400 text-sm">Flyers, posters, social media graphics that convert</p>
           </div>
-          <div class="glass-card p-6 rounded-2xl text-center group cursor-pointer">
+          <div class="glass-card p-6 rounded-2xl text-center group">
             <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <i class="fas fa-globe text-2xl text-white"></i>
             </div>
@@ -139,46 +130,46 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-gray-800">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <div class="flex items-center space-x-2 mb-4">
-              <i class="fas fa-crown text-2xl text-orange-500"></i>
-              <span class="text-xl font-black gradient-text">Phantom Creative</span>
-            </div>
-            <p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p>
+    <footer class="footer">
+      <div class="footer-container">
+        <div>
+          <div class="footer-logo">
+            <i class="fas fa-crown"></i>
+            <span class="gradient-text">Phantom Creative</span>
           </div>
-          <div>
-            <h4 class="font-bold mb-4">Quick Links</h4>
-            <ul class="space-y-2 text-gray-500">
-              <li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li>
-              <li><a href="about.html" class="hover:text-orange-500 transition">About</a></li>
-              <li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li>
-              <li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold mb-4">Services</h4>
-            <ul class="space-y-2 text-gray-500">
-              <li>Logo Design</li>
-              <li>Brand Identity</li>
-              <li>Marketing Materials</li>
-              <li>Web Design</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold mb-4">Connect</h4>
-            <div class="flex space-x-4">
-              <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a>
-              <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+          <p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Logo Design</a></li>
+            <li><a href="services.html">Brand Identity</a></li>
+            <li><a href="services.html">Marketing Materials</a></li>
+            <li><a href="services.html">Web Design</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Connect</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a>
+            <a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
-        <div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800">
-          <p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p>
-        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p>
       </div>
     </footer>
   </div>
@@ -189,7 +180,7 @@
   </div>
 
   <script type="module">
-    import { auth, ADMIN_EMAIL, db, ref, push, set, GOOGLE_SCRIPT_URL } from './firebase-config.js';
+    import { auth, ADMIN_EMAIL, db, ref, push, set } from './firebase-config.js';
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     
     const authOverlay = document.getElementById('authOverlay');
@@ -197,26 +188,16 @@
     const userEmailDisplay = document.getElementById('userEmailDisplay');
     const authButton = document.getElementById('authButton');
     
-    // Mobile Menu Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
     
-    mobileMenuBtn?.addEventListener('click', () => {
-      navbarMenu.classList.toggle('active');
-    });
-    
-    // Back to Top Button
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.classList.add('show');
-      } else {
-        backToTop.classList.remove('show');
-      }
+      if (window.scrollY > 300) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
     });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     
     // Track visitor
     async function trackVisitor() {
@@ -224,52 +205,28 @@
         const ipResponse = await fetch('https://api.ipify.org?format=json');
         const ipData = await ipResponse.json();
         const ip = ipData.ip;
-        
         const locationResponse = await fetch(`https://ipapi.co/${ip}/json/`);
         const locationData = await locationResponse.json();
         
         const visitorData = {
           ip: ip,
           city: locationData.city || 'Unknown',
-          region: locationData.region || 'Unknown',
           country: locationData.country_name || 'Unknown',
-          device: /Mobile|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
-          browser: navigator.userAgent.split(' ').pop(),
+          device: /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
           page: window.location.pathname,
-          timestamp: Date.now(),
-          referrer: document.referrer || 'Direct'
+          timestamp: Date.now()
         };
-        
         const analyticsRef = ref(db, 'analytics');
-        const newVisitorRef = push(analyticsRef);
-        await set(newVisitorRef, visitorData);
-        
-        await fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'visitor_alert',
-            ip: ip,
-            location: `${locationData.city || 'Unknown'}, ${locationData.country_name || 'Unknown'}`,
-            device: visitorData.device,
-            page: visitorData.page,
-            timestamp: new Date().toLocaleString()
-          })
-        });
-      } catch (error) {
-        console.log('Analytics error:', error);
-      }
+        await set(push(analyticsRef), visitorData);
+      } catch (error) { console.log('Analytics error:', error); }
     }
     
-    // Auth State Handler
     onAuthStateChanged(auth, (user) => {
       if (user) {
         authOverlay.style.display = 'none';
         mainContent.style.display = 'block';
         userEmailDisplay.textContent = user.email;
         userEmailDisplay.style.display = 'inline';
-        
         if (user.email === ADMIN_EMAIL) {
           authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
           authButton.onclick = () => window.location.href = 'dashboard.html';
@@ -277,26 +234,20 @@
           authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account';
           authButton.onclick = () => window.location.href = 'dashboard.html';
         }
-        
-        if (!sessionStorage.getItem('visitorTracked')) {
-          trackVisitor();
-          sessionStorage.setItem('visitorTracked', 'true');
-        }
+        if (!sessionStorage.getItem('visitorTracked')) { trackVisitor(); sessionStorage.setItem('visitorTracked', 'true'); }
       } else {
         authOverlay.style.display = 'flex';
         mainContent.style.display = 'none';
       }
     });
     
-    // Load services
     import { ref as dbRef, onValue } from './firebase-config.js';
     const servicesRef = dbRef(db, 'services');
     onValue(servicesRef, (snapshot) => {
       const container = document.getElementById('servicesGrid');
       const services = snapshot.val();
       if (services) {
-        const servicesArray = Object.entries(services);
-        container.innerHTML = servicesArray.map(([id, service]) => `
+        container.innerHTML = Object.entries(services).map(([id, service]) => `
           <div class="glass-card p-6 rounded-2xl text-center group">
             <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
               <i class="${service.icon || 'fas fa-palette'} text-2xl text-white"></i>
