@@ -11,6 +11,7 @@ body {
   overflow-x: hidden;
 }
 
+/* Animations */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -41,6 +42,7 @@ body {
 .animate-slideInLeft { animation: slideInLeft 0.6s ease-out; }
 .animate-slideInRight { animation: slideInRight 0.6s ease-out; }
 
+/* Gradients */
 .gradient-bg {
   background: linear-gradient(135deg, #ff5e00 0%, #ff9a3c 100%);
 }
@@ -52,6 +54,135 @@ body {
   color: transparent;
 }
 
+/* Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 94, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.navbar-logo i {
+  font-size: 1.8rem;
+  color: #ff5e00;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover i {
+  transform: rotate(12deg);
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.navbar-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #ff5e00, #ff9a3c);
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+  width: 100%;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: #ff5e00;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.navbar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  .navbar-menu {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+  
+  .navbar-menu.active {
+    left: 0;
+  }
+  
+  .navbar-toggle {
+    display: block;
+  }
+  
+  .navbar-buttons {
+    gap: 0.5rem;
+  }
+  
+  .navbar-buttons .btn-primary,
+  .navbar-buttons .btn-outline {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Glass Card */
 .glass-card {
   background: rgba(10, 10, 10, 0.8);
   backdrop-filter: blur(10px);
@@ -66,15 +197,18 @@ body {
   box-shadow: 0 10px 30px rgba(255, 94, 0, 0.2);
 }
 
+/* Buttons */
 .btn-primary {
   background: linear-gradient(135deg, #ff5e00, #ff9a3c);
-  padding: 12px 28px;
+  padding: 10px 24px;
   border-radius: 50px;
   font-weight: 600;
   transition: all 0.3s ease;
   display: inline-block;
   border: none;
   cursor: pointer;
+  text-decoration: none;
+  color: white;
 }
 
 .btn-primary:hover {
@@ -85,12 +219,14 @@ body {
 .btn-outline {
   border: 2px solid #ff5e00;
   background: transparent;
-  padding: 10px 26px;
+  padding: 8px 22px;
   border-radius: 50px;
   font-weight: 600;
   transition: all 0.3s ease;
   cursor: pointer;
   color: #ff5e00;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-outline:hover {
@@ -99,33 +235,7 @@ body {
   transform: scale(1.05);
 }
 
-.nav-link {
-  position: relative;
-  transition: color 0.3s ease;
-  cursor: pointer;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(135deg, #ff5e00, #ff9a3c);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: #ff5e00;
-}
-
+/* Form Inputs */
 .form-input {
   width: 100%;
   padding: 12px 16px;
@@ -146,10 +256,12 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #1a1a1a; }
 ::-webkit-scrollbar-thumb { background: #ff5e00; border-radius: 10px; }
 
+/* Spinner */
 .spinner {
   border: 3px solid rgba(255, 94, 0, 0.3);
   border-top: 3px solid #ff5e00;
@@ -159,6 +271,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
+/* Toast Notifications */
 .toast-notification {
   position: fixed;
   bottom: 20px;
@@ -175,6 +288,7 @@ body {
 .toast-error { background: linear-gradient(135deg, #d63031, #e17055); }
 .toast-info { background: linear-gradient(135deg, #0984e3, #74b9ff); }
 
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -200,6 +314,7 @@ body {
   animation: slideInLeft 0.3s ease;
 }
 
+/* Gallery Grid */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -238,6 +353,7 @@ body {
   bottom: 0;
 }
 
+/* Blog Card */
 .blog-card {
   background: rgba(255, 255, 255, 0.03);
   border-radius: 15px;
@@ -301,14 +417,64 @@ body {
   flex-direction: column;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-  .modal-content { padding: 20px; margin: 20px; }
-  .btn-primary, .btn-outline { padding: 10px 20px; font-size: 14px; }
-  .back-to-top { bottom: 70px; right: 15px; width: 40px; height: 40px; }
-  .back-to-top i { font-size: 18px; }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .btn-primary, .btn-outline {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .back-to-top {
+    bottom: 70px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .back-to-top i {
+    font-size: 18px;
+  }
+  
+  .navbar-container {
+    padding: 0.8rem 1rem;
+  }
+  
+  .navbar-logo span {
+    font-size: 1.2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem !important;
+  }
 }
 
 @media (max-width: 480px) {
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .navbar-buttons {
+    gap: 0.3rem;
+  }
+  
+  .navbar-buttons .btn-primary,
+  .navbar-buttons .btn-outline {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
