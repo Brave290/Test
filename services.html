@@ -26,7 +26,16 @@
     <section class="py-16"><div class="container mx-auto px-4"><div id="dynamicServices" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="text-center py-12 col-span-full"><div class="spinner mx-auto mb-4"></div><p class="text-gray-400">Loading services...</p></div></div></div></section>
     <section class="py-16 bg-black/40"><div class="container mx-auto px-4"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold mb-4">Our <span class="gradient-text">Process</span></h2><p class="text-gray-400 max-w-2xl mx-auto">How we bring your vision to life</p></div><div class="grid md:grid-cols-4 gap-6"><div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl font-bold">1</span></div><h3 class="font-bold mb-2">Discovery</h3><p class="text-gray-400 text-sm">We learn about your brand, goals, and vision</p></div><div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl font-bold">2</span></div><h3 class="font-bold mb-2">Research</h3><p class="text-gray-400 text-sm">Market analysis and creative exploration</p></div><div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl font-bold">3</span></div><h3 class="font-bold mb-2">Creation</h3><p class="text-gray-400 text-sm">Bringing concepts to life with precision</p></div><div class="text-center"><div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl font-bold">4</span></div><h3 class="font-bold mb-2">Delivery</h3><p class="text-gray-400 text-sm">Final polish and seamless handover</p></div></div></div></section>
     <section class="py-20 gradient-bg"><div class="container mx-auto px-4 text-center"><h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to elevate your brand?</h2><a href="contact.html" class="bg-white text-orange-600 px-8 py-3 rounded-full font-bold hover:scale-105 transition inline-block">Get a Quote <i class="fas fa-arrow-right ml-2"></i></a></div></section>
-    <footer class="py-12 border-t border-gray-800"><div class="container mx-auto px-4"><div class="grid md:grid-cols-4 gap-8 mb-8"><div><div class="flex items-center space-x-2 mb-4"><i class="fas fa-crown text-2xl text-orange-500"></i><span class="text-xl font-black gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div><div><h4 class="font-bold mb-4">Quick Links</h4><ul class="space-y-2 text-gray-500"><li><a href="index.html" class="hover:text-orange-500 transition">Home</a></li><li><a href="about.html" class="hover:text-orange-500 transition">About</a></li><li><a href="services.html" class="hover:text-orange-500 transition">Services</a></li><li><a href="portfolio.html" class="hover:text-orange-500 transition">Portfolio</a></li></ul></div><div><h4 class="font-bold mb-4">Services</h4><ul class="space-y-2 text-gray-500"><li>Logo Design</li><li>Brand Identity</li><li>Marketing Materials</li><li>Web Design</li></ul></div><div><h4 class="font-bold mb-4">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div></div><div class="text-center text-gray-500 text-sm pt-8 border-t border-gray-800"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div></div></footer>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div><div class="footer-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></div><p class="text-gray-500 text-sm">Creating visual identities that leave lasting impressions.</p></div>
+        <div><h4 class="footer-title">Quick Links</h4><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4 class="footer-title">Services</h4><ul class="footer-links"><li><a href="services.html">Logo Design</a></li><li><a href="services.html">Brand Identity</a></li><li><a href="services.html">Marketing Materials</a></li><li><a href="services.html">Web Design</a></li></ul></div>
+        <div><h4 class="footer-title">Connect</h4><div class="flex space-x-4"><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-behance"></i></a><a href="#" class="w-10 h-10 gradient-bg rounded-full flex items-center justify-center hover:scale-110 transition"><i class="fab fa-linkedin-in"></i></a></div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 Phantom Creative. All rights reserved. | Made with <i class="fas fa-heart text-orange-500"></i> by Akanji Mus'ab</p></div>
+    </footer>
   </div>
 
   <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
@@ -34,34 +43,19 @@
   <script type="module">
     import { auth, ADMIN_EMAIL, db, ref, onValue } from './firebase-config.js';
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-    
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navbarMenu = document.getElementById('navbarMenu');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn'); const navbarMenu = document.getElementById('navbarMenu');
     mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
-    
     const backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    
     onAuthStateChanged(auth, (user) => {
-      const authButton = document.getElementById('authButton');
-      const userEmailDisplay = document.getElementById('userEmailDisplay');
+      const authButton = document.getElementById('authButton'); const userEmailDisplay = document.getElementById('userEmailDisplay');
       if (user) {
-        userEmailDisplay.textContent = user.email;
-        userEmailDisplay.style.display = 'inline';
-        if (user.email === ADMIN_EMAIL) {
-          authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard';
-          authButton.onclick = () => window.location.href = 'dashboard.html';
-        } else {
-          authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account';
-          authButton.onclick = () => window.location.href = 'dashboard.html';
-        }
-      } else {
-        authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In';
-        authButton.onclick = () => window.location.href = 'login.html';
-      }
+        userEmailDisplay.textContent = user.email; userEmailDisplay.style.display = 'inline';
+        if (user.email === ADMIN_EMAIL) { authButton.innerHTML = '<i class="fas fa-tachometer-alt mr-2"></i>Dashboard'; authButton.onclick = () => window.location.href = 'dashboard.html'; }
+        else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>My Account'; authButton.onclick = () => window.location.href = 'dashboard.html'; }
+      } else { authButton.innerHTML = '<i class="fas fa-user mr-2"></i>Sign In'; authButton.onclick = () => window.location.href = 'login.html'; }
     });
-    
     const servicesRef = ref(db, 'services');
     onValue(servicesRef, (snapshot) => {
       const container = document.getElementById('dynamicServices');
