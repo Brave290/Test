@@ -19,3 +19,5 @@ export const db = getDatabase(app);
 export const storage = getStorage(app);
 export const ADMIN_EMAIL = "legateakanjimusab@gmail.com";
 export { ref, get, set, push, onValue, remove, update };
+// Add this at the very bottom of firebase-config.js
+export const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx28dk192-FqaaB3KqD_1z_HbqOyusG6m0imeO9U0YUHqH3HaAG0reDPAWOwme0tFx4lA/exec";
