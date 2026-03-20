@@ -13,84 +13,78 @@
 
   <nav class="navbar">
     <div class="navbar-container">
-      <a href="index.html" class="navbar-logo"><i class="fas fa-crown"></i><span class="gradient-text">Phantom Creative</span></a>
+      <a href="index.html" class="navbar-logo">
+        <i class="fas fa-crown"></i>
+        <span class="gradient-text">Phantom Creative</span>
+      </a>
       <div class="navbar-menu" id="navbarMenu">
-        <a href="index.html" class="navbar-link">Home</a><a href="about.html" class="navbar-link">About</a><a href="services.html" class="navbar-link">Services</a><a href="portfolio.html" class="navbar-link">Portfolio</a><a href="blog.html" class="navbar-link">Blog</a><a href="contact.html" class="navbar-link">Contact</a>
+        <a href="index.html" class="navbar-link">Home</a>
+        <a href="about.html" class="navbar-link">About</a>
+        <a href="services.html" class="navbar-link">Services</a>
+        <a href="portfolio.html" class="navbar-link">Portfolio</a>
+        <a href="blog.html" class="navbar-link">Blog</a>
+        <a href="contact.html" class="navbar-link">Contact</a>
       </div>
-      <div class="navbar-buttons"><button onclick="window.location.href='index.html'" class="btn-outline" style="padding: 8px 20px;"><i class="fas fa-home mr-2"></i>Home</button><button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button></div>
+      <div class="navbar-buttons">
+        <a href="signup.html" class="btn-outline" style="padding: 8px 20px;">Sign Up</a>
+        <button class="navbar-toggle" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+      </div>
     </div>
   </nav>
 
-  <section class="min-h-screen flex items-center justify-center pt-20">
-    <div class="container mx-auto px-4 max-w-md">
-      <div class="glass-card rounded-2xl p-8 animate-fadeInUp">
-        <div class="text-center mb-8"><i class="fas fa-crown text-5xl text-orange-500 mb-3"></i><h2 class="text-3xl font-bold gradient-text">Welcome Back</h2><p class="text-gray-400 mt-2">Sign in to access your creative dashboard</p></div>
-        <div class="flex mb-6 border-b border-gray-700"><button onclick="switchTab('login')" id="loginTabBtn" class="flex-1 py-2 text-center font-semibold border-b-2 border-orange-500">Sign In</button><button onclick="switchTab('signup')" id="signupTabBtn" class="flex-1 py-2 text-center font-semibold text-gray-400">Create Account</button></div>
-        <div id="loginForm"><input type="email" id="loginEmail" placeholder="Email address" class="form-input mb-4"><input type="password" id="loginPassword" placeholder="Password" class="form-input mb-4"><button onclick="login()" class="btn-primary w-full mb-3">Sign In <i class="fas fa-arrow-right ml-2"></i></button><button onclick="forgotPassword()" class="text-orange-500 text-sm hover:underline w-full text-center">Forgot Password?</button></div>
-        <div id="signupForm" class="hidden"><input type="text" id="signupName" placeholder="Full name" class="form-input mb-4"><input type="email" id="signupEmail" placeholder="Email address" class="form-input mb-4"><input type="password" id="signupPassword" placeholder="Password (min 6 characters)" class="form-input mb-4"><input type="password" id="signupConfirmPassword" placeholder="Confirm password" class="form-input mb-4"><button onclick="signup()" class="btn-primary w-full">Create Account <i class="fas fa-user-plus ml-2"></i></button></div>
-        <div class="mt-6 text-center"><a href="index.html" class="text-gray-500 text-sm hover:text-gray-400"><i class="fas fa-arrow-left mr-1"></i> Back to Home</a></div>
+  <div class="auth-page">
+    <div class="auth-card glass-card p-8 rounded-2xl animate-fadeInUp">
+      <div class="auth-header">
+        <i class="fas fa-crown"></i>
+        <h1 class="gradient-text">Welcome Back</h1>
+        <p>Sign in to access your creative dashboard</p>
+      </div>
+      
+      <form id="loginForm" class="auth-form">
+        <input type="email" id="loginEmail" placeholder="Email address" class="form-input" required>
+        <input type="password" id="loginPassword" placeholder="Password" class="form-input" required>
+        <button type="submit" class="btn-primary w-full">Sign In <i class="fas fa-arrow-right ml-2"></i></button>
+      </form>
+      
+      <div class="auth-footer">
+        <button onclick="forgotPassword()" class="text-orange-500 text-sm hover:underline w-full text-center mb-2">Forgot Password?</button>
+        <p>Don't have an account? <a href="signup.html">Create one</a></p>
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="support-icon" onclick="openSupport()">
+    <i class="fas fa-headset"></i>
+    <span class="support-tooltip">Need help? Chat with us</span>
+  </div>
 
   <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 
   <script type="module">
-    import { auth, db, ref, set } from './firebase-config.js';
-    import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+    import { auth } from './firebase-config.js';
+    import { signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
     
-    function showToast(message, type) { const toast = document.createElement('div'); toast.className = `toast-notification toast-${type}`; toast.innerHTML = message; document.body.appendChild(toast); setTimeout(() => toast.remove(), 3000); }
+    function showToast(message, type) { 
+      const toast = document.createElement('div'); 
+      toast.className = `toast-notification toast-${type}`; 
+      toast.innerHTML = message; 
+      document.body.appendChild(toast); 
+      setTimeout(() => toast.remove(), 3000); 
+    }
     
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn'); const navbarMenu = document.getElementById('navbarMenu');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
     mobileMenuBtn?.addEventListener('click', () => navbarMenu.classList.toggle('active'));
+    
     const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => { if (window.scrollY > 300) backToTop.classList.add('show'); else backToTop.classList.remove('show'); });
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.classList.add('show');
+      else backToTop.classList.remove('show');
+    });
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     
-    window.switchTab = (tab) => {
-      const loginForm = document.getElementById('loginForm'); const signupForm = document.getElementById('signupForm');
-      const loginTab = document.getElementById('loginTabBtn'); const signupTab = document.getElementById('signupTabBtn');
-      if (tab === 'login') {
-        loginForm.classList.remove('hidden'); signupForm.classList.add('hidden');
-        loginTab.classList.add('border-orange-500', 'text-white'); loginTab.classList.remove('text-gray-400');
-        signupTab.classList.remove('border-orange-500'); signupTab.classList.add('text-gray-400');
-      } else {
-        loginForm.classList.add('hidden'); signupForm.classList.remove('hidden');
-        signupTab.classList.add('border-orange-500', 'text-white'); signupTab.classList.remove('text-gray-400');
-        loginTab.classList.remove('border-orange-500'); loginTab.classList.add('text-gray-400');
-      }
-    };
-    
-    window.login = async () => {
-      const email = document.getElementById('loginEmail').value; const password = document.getElementById('loginPassword').value;
-      if (!email || !password) { showToast('Please fill in all fields', 'error'); return; }
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        showToast('Welcome back! Redirecting...', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
-      } catch (error) {
-        if (error.code === 'auth/user-not-found') showToast('No account found with this email', 'error');
-        else if (error.code === 'auth/wrong-password') showToast('Incorrect password', 'error');
-        else showToast(error.message, 'error');
-      }
-    };
-    
-    window.signup = async () => {
-      const name = document.getElementById('signupName').value; const email = document.getElementById('signupEmail').value;
-      const password = document.getElementById('signupPassword').value; const confirmPassword = document.getElementById('signupConfirmPassword').value;
-      if (!name || !email || !password) { showToast('Please fill in all fields', 'error'); return; }
-      if (password.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
-      if (password !== confirmPassword) { showToast('Passwords do not match', 'error'); return; }
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(userCredential.user, { displayName: name });
-        await set(ref(db, `users/${userCredential.user.uid}`), { displayName: name, email: email, createdAt: Date.now(), role: 'user' });
-        showToast('Account created successfully! Welcome to Phantom Creative!', 'success');
-        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
-      } catch (error) {
-        if (error.code === 'auth/email-already-in-use') showToast('Email already registered. Please sign in instead.', 'error');
-        else showToast(error.message, 'error');
-      }
+    window.openSupport = () => {
+      window.location.href = "mailto:legateakanjimusab@gmail.com?subject=Support Request&body=Hello, I need help with...";
     };
     
     window.forgotPassword = async () => {
@@ -99,9 +93,40 @@
         try {
           await sendPasswordResetEmail(auth, email);
           showToast('Password reset email sent! Check your inbox.', 'success');
-        } catch (error) { showToast(error.message, 'error'); }
+        } catch (error) { 
+          showToast(error.message, 'error'); 
+        }
       }
     };
+    
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      if (!email || !password) {
+        showToast('Please fill in all fields', 'error');
+        return;
+      }
+      
+      const submitBtn = e.target.querySelector('button');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing In...';
+      submitBtn.disabled = true;
+      
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        showToast('Welcome back! Redirecting...', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      } catch (error) {
+        if (error.code === 'auth/user-not-found') showToast('No account found with this email', 'error');
+        else if (error.code === 'auth/wrong-password') showToast('Incorrect password', 'error');
+        else showToast(error.message, 'error');
+      } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
